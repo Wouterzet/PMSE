@@ -57,7 +57,7 @@ public class HomeViewModel extends AndroidViewModel
     public void onMoviesAvailable(List<Movie> movies) {
         this.mMovies.setValue((ArrayList<Movie>) movies);
         // Save in the database
-        // this.mMovieRepository.clear();
+         this.mMovieRepository.clear();
         this.mMovieRepository.insertAll(movies);
     }
 

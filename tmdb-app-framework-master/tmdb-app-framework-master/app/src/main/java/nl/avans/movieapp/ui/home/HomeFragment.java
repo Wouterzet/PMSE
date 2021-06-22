@@ -2,11 +2,13 @@ package nl.avans.movieapp.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 import nl.avans.movieapp.ui.slideshow.SlideshowViewModel;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
@@ -88,7 +91,8 @@ public class HomeFragment
         Log.d(LOG_TAG, "onMovieSelected at pos " + position);
 
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-        startActivity(intent);
+        intent.putExtra("Movie", mMovies.get(position));
+        getContext().startActivity(intent);
     }
 
 }
