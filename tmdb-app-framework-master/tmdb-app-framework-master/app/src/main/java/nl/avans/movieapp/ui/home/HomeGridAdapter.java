@@ -58,6 +58,10 @@ public class HomeGridAdapter
                 .resize(700, 700)
                 .centerInside()
                 .into(holder.mMovieImage);
+        if (movie.getTitle() != null) {
+            holder.mMovieTextview.setText(movie.getTitle());
+        }
+
     }
 
     @Override
@@ -75,10 +79,12 @@ public class HomeGridAdapter
     public class MoviesGridViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView mMovieImage;
+        public TextView mMovieTextview;
 
         public MoviesGridViewHolder(@NonNull View itemView) {
             super(itemView);
             mMovieImage = (ImageView) itemView.findViewById(R.id.home_movies_griditem_imageurl);
+            mMovieTextview = (TextView) itemView.findViewById(R.id.home_movies_griditem_textview);
 
             itemView.setOnClickListener(this);
 
