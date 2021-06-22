@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ import nl.avans.movieapp.domain.Movie;
 public class MovieDetailActivity extends AppCompatActivity implements Serializable {
 private TextView mTitle;
 private ImageView mBanner;
+private  TextView mOverview;
+private  TextView mRating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +41,16 @@ private ImageView mBanner;
         mBanner = (ImageView) findViewById(R.id.iv_banner);
         mTitle = (TextView) findViewById(R.id.tv_title);
         mTitle.setText(m.getTitle());
+        mOverview = (TextView) findViewById(R.id.tv_overview);
+        mOverview.setText(m.getOverview());
+        mRating = (TextView) findViewById(R.id.tv_rating);
+        mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
         Picasso.get()
                 .load(m.getBackdrop_path())
                 .resize(1200, 750)
                 .centerInside()
                 .into(mBanner);
+        Log.d("Test", m.toString());
 
 
 
