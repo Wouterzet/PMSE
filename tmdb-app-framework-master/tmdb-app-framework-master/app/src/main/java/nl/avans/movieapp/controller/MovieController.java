@@ -37,6 +37,10 @@ public class MovieController
         Call<MovieApiResponse> call = movieAPI.loadTrendingMoviesByWeek(pageNr);
         call.enqueue(this);
     }
+    public void loadMovieById(int id){
+        Call<MovieApiResponse> call = movieAPI.loadMovieById(id);
+        call.enqueue(this);
+    }
 
     @Override
     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {

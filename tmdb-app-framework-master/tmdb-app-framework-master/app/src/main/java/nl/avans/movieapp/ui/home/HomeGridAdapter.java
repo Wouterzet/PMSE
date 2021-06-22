@@ -1,6 +1,7 @@
 package nl.avans.movieapp.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
 /**
  *
@@ -37,7 +39,7 @@ public class HomeGridAdapter
     @NonNull
     @Override
     public MoviesGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Log.d(LOG_TAG, "onCreateViewHolder aangeroepen");
+         Log.d(LOG_TAG, "onCreateViewHolder aangeroepen");
 
         int layoutIdForListItem = R.layout.home_movies_grid_item;
         final boolean shouldAttachToParentImmediately = false;
@@ -79,12 +81,14 @@ public class HomeGridAdapter
             mMovieImage = (ImageView) itemView.findViewById(R.id.home_movies_griditem_imageurl);
 
             itemView.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View view) {
             Log.d(LOG_TAG, "onClick on item " + getAdapterPosition());
             listener.onMovieSelected(getAdapterPosition());
+
         }
     }
 

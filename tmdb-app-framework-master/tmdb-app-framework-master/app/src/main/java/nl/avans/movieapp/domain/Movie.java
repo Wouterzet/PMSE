@@ -3,10 +3,13 @@ package nl.avans.movieapp.domain;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
 import nl.avans.movieapp.controller.MovieController;
 
 @Entity
-public class Movie {
+public class Movie implements Serializable {
 
     // De attributen moeten overeen komen met de waarden zoals die in de JSON gebruikt worden.
     // Je kunt die attribuutname ook aanpassen, maar dat vraagt finetuning.

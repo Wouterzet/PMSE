@@ -14,12 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AvansMovieApp">
         <activity
-            android:configChanges="orientation|screenSize|screenLayout"
-            android:name=".ui.home.MovieDetailActivity"
-            android:label="@string/title_activity_movie_detail"
-            android:theme="@style/Theme.AvansMovieApp.NoActionBar" />
-        <activity
             android:name=".ui.settings.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".ui.movie.MovieDetailActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".MainActivity"
