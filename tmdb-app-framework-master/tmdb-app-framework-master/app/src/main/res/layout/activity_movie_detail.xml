@@ -7,7 +7,20 @@
     tools:context=".ui.movie.MovieDetailActivity">
 
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AvansMovieApp.AppBarOverlay">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#064460"
+
+            app:popupTheme="@style/Theme.AvansMovieApp.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
     <include layout="@layout/content_movie_detail" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

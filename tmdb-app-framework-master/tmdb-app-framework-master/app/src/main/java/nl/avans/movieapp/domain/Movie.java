@@ -19,6 +19,8 @@ public class Movie implements Serializable {
 
     @NonNull
     private String poster_path;
+    @NonNull
+    private String backdrop_path;
 
     private Boolean adult;
 
@@ -28,6 +30,7 @@ public class Movie implements Serializable {
     public Movie(
             @NonNull int id,
             @NonNull String poster_path,
+            @NonNull String backdrop_path,
             Boolean adult,
             @NonNull String title
     ) {
@@ -35,6 +38,7 @@ public class Movie implements Serializable {
         this.poster_path = /* MovieController.BASE_POSTER_PATH_URL + */ poster_path;
         this.adult = adult;
         this.title = title;
+        this.backdrop_path = /* MovieController.BASE_POSTER_PATH_URL + */ backdrop_path;
     }
 
     @Override
@@ -44,12 +48,15 @@ public class Movie implements Serializable {
                 ", poster_path='" + poster_path + '\'' +
                 ", adult=" + adult +
                 ", title='" + title + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
                 '}';
     }
 
     public int getId() {
         return id;
     }
+
+    public String getBackdrop_path(){return MovieController.BASE_POSTER_PATH_URL+ backdrop_path;}
 
     public String getPoster_path() {
         return MovieController.BASE_POSTER_PATH_URL + poster_path;
