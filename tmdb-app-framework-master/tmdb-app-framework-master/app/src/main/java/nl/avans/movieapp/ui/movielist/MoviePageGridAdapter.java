@@ -17,16 +17,16 @@ import java.util.List;
 
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.ui.home.HomeGridAdapter;
+import nl.avans.movieapp.service.MovieApiResponse;
 
-public class MovieListGridAdapter
-        extends RecyclerView.Adapter<MovieListGridAdapter.MoviesGridViewHolder> {
+public class MoviePageGridAdapter
+        extends RecyclerView.Adapter<MoviePageGridAdapter.MoviesGridViewHolder> {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final ArrayList<Movie> moviesArrayList = new ArrayList<>();
     private final OnMovieSelectionListener listener;
 
-    public MovieListGridAdapter(OnMovieSelectionListener listener) {
+    public MoviePageGridAdapter(OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
         this.listener = listener;
     }
@@ -57,7 +57,7 @@ public class MovieListGridAdapter
             holder.mMovieTitle.setText(movie.getTitle());
         }
         if (movie.getTitle() != null) {
-            holder.mMovieLength.setText(String.valueOf(movie.getRuntime()));
+            holder.mMovieLength.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
         }
         if (movie.getTitle() != null) {
             holder.mMovieReleaseYear.setText(movie.getRelease_date().substring(0,4));

@@ -18,6 +18,9 @@ public interface MovieAPI {
     @GET("trending/movie/week?api_key=" + API_KEY)
     Call<MovieApiResponse> loadTrendingMoviesByWeek(@Query("page") int pageNr);
 
+    @GET("movie/now_playing?api_key=" + API_KEY + "&language=en-US")
+    Call<MovieApiResponse> loadLatestMovies(@Query("page") int pageNr);
+
     @GET("movie/{movie_id}/reviews?api_key=" + API_KEY)
     Call<CommentApiResponse> loadMovieCommentsById(@Path("movie_id") int id);
 

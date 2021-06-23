@@ -9,16 +9,18 @@ import nl.avans.movieapp.domain.Movie;
  */
 public class MovieApiResponse {
 
+    private static int page2;
     private int page;
     private List<Movie> results;
 
     public MovieApiResponse(int page, List<Movie> results) {
         this.page = page;
         this.results = results;
+        this.page2 = page;
     }
 
-    public int getPage() {
-        return page;
+    public static int getPage() {
+        return page2;
     }
 
     public void setPage(int page) {
