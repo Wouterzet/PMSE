@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         String title = "Kinepolis";
         setSupportActionBar(toolbar);
 
-
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         toolbar.setTitle(title);
-
     }
 
     @Override
