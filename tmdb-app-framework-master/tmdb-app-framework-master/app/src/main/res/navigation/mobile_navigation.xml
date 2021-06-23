@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_movie"
-        android:name="nl.avans.movieapp.ui.movielist.MovieListFragment"
+        android:name="nl.avans.movieapp.ui.movielist.MoviePageFragment"
         android:label="@string/menu_movies"
         tools:layout="@layout/fragment_movies" />
     <fragment
