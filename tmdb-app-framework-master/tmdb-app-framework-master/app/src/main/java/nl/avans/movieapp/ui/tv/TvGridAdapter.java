@@ -34,7 +34,7 @@ public class TvGridAdapter
     public TvGridViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(LOG_TAG, "onCreateViewHolder aangeroepen");
 
-        int layoutIdForListItem = R.layout.comments_movie_detail;
+        int layoutIdForListItem = R.layout.tvshow_list_grid_item;
         final boolean shouldAttachToParentImmediately = false;
 
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
@@ -46,11 +46,18 @@ public class TvGridAdapter
         Tv movie = moviesArrayList.get(position);
         // Log.d(LOG_TAG, "onBindViewHolder");
 
-//
-//        holder.mUsername.setText(movie.getAuthor());
-//        holder.mUserComment.setText(movie.getContent());
 
-
+        Picasso.get()
+                .load(movie.getPoster_path())
+                .resize(700, 700)
+                .centerInside()
+                .into(holder.mPoster);
+        if (movie.getName() != null) {
+            holder.mTitle.setText(movie.getName());
+        }
+            holder.mSeasons.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
+            holder.mDate.setText(movie.getFirst_air_date());
+            Log.d("Test", movie.toString());
     }
 
     @Override
@@ -67,14 +74,17 @@ public class TvGridAdapter
 
     public class TvGridViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView mUsername;
-        public TextView mUserComment;
+        public TextView mTitle;
+        public TextView mDate;
+        public TextView mSeasons;
+        public ImageView mPoster;
 
         public TvGridViewholder(@NonNull View itemView) {
             super(itemView);
-            mUsername = (TextView) itemView.findViewById(R.id.tv_comment_username);
-            mUserComment = (TextView) itemView.findViewById(R.id.tv_comment_content);
-
+            mTitle = (TextView) itemView.findViewById(R.id.tv_tv_title);
+            mDate = (TextView) itemView.findViewById(R.id.tv_tv__griditem_releaseYear);
+            mSeasons = (TextView) itemView.findViewById(R.id.tv_tv_seasons);
+            mPoster = (ImageView) itemView.findViewById(R.id.tv_griditem_imageurl);
             itemView.setOnClickListener(this);
 
         }

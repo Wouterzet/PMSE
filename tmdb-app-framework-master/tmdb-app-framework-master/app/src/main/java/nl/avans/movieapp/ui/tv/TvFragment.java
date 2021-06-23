@@ -42,17 +42,16 @@ public class TvFragment
     private TvGridAdapter mMoviesGridAdapter;
 
     private static final int ONE_COLUMN = 1;
-    private static final int TWO_COLUMNS = 2;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_tvshows, container, false);
 
-        int numGridColumns = TWO_COLUMNS;
+        int numGridColumns = ONE_COLUMN;
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(
                 container.getContext(), numGridColumns);
-        mRecyclerView = root.findViewById(R.id.home_movies_grid);
+        mRecyclerView = root.findViewById(R.id.Recycler_View_tvshows);
         mRecyclerView.setLayoutManager(layoutManager);
         mMoviesGridAdapter = new TvGridAdapter();
         mRecyclerView.setAdapter(mMoviesGridAdapter);
@@ -71,19 +70,7 @@ public class TvFragment
          * Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
          * performs a swipe-to-refresh gesture.
          */
-        final SwipeRefreshLayout mSwipeRefreshLayout = root.findViewById(R.id.home_movies_swiperefresh);
-        mSwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout");
-                        // Your action here
 
-                        // Stop the spinner from spinning
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }
-        );
         return root;
     }
 

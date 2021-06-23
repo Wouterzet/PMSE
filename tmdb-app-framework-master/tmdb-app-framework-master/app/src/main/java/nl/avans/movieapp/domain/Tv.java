@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 import nl.avans.movieapp.controller.MovieController;
+import nl.avans.movieapp.controller.TvController;
 
 @Entity
 public class Tv implements Serializable {
@@ -21,32 +22,34 @@ public class Tv implements Serializable {
     private String poster_path;
     @NonNull
     private String backdrop_path;
-
-    private Boolean adult;
+    @NonNull
+    private String overview;
+@NonNull
+private String first_air_date;
 
     @NonNull
-    private String title;
+    private String name;
 
     private Double vote_average;
 
-    @NonNull
-    private String overview;
+
     public Tv(
             @NonNull int id,
+            @NonNull String first_air_date,
             @NonNull String poster_path,
             @NonNull String backdrop_path,
-            Boolean adult,
             @NonNull String overview,
             Double vote_average,
-            @NonNull String title
+            @NonNull String name
     ) {
+        this.first_air_date = first_air_date;
         this.overview = overview;
         this.id = id;
         this.vote_average = vote_average;
-        this.poster_path = /* MovieController.BASE_POSTER_PATH_URL + */ poster_path;
-        this.adult = adult;
-        this.title = title;
-        this.backdrop_path = /* MovieController.BASE_POSTER_PATH_URL + */ backdrop_path;
+        this.poster_path =  MovieController.BASE_POSTER_PATH_URL +  poster_path;
+
+        this.name = name;
+        this.backdrop_path =  MovieController.BASE_POSTER_PATH_URL +  backdrop_path;
     }
 
     @Override
@@ -54,11 +57,10 @@ public class Tv implements Serializable {
         return "Movie{" +
                 "id=" + id +
                 ", poster_path='" + poster_path + '\'' +
-                ", adult=" + adult +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
                 ", backdrop_path='" + backdrop_path + '\'' +
                 ", overview='" + overview + '\'' +
-                ", popularity='" + vote_average + '\'' +
+                ", popularity='" + overview + '\'' +
                 '}';
     }
 
@@ -66,20 +68,15 @@ public class Tv implements Serializable {
         return id;
     }
 
-    public String getBackdrop_path(){return MovieController.BASE_POSTER_PATH_URL+ backdrop_path;}
+    @NonNull
+    public String getFirst_air_date() { return first_air_date;}
+
+    public String getBackdrop_path(){return TvController.BASE_POSTER_PATH_URL+ backdrop_path;}
     public String getOverview(){return overview;}
     public Double getVote_average(){return vote_average;}
-
     public String getPoster_path() {
-        return MovieController.BASE_POSTER_PATH_URL + poster_path;
+        return TvController.BASE_POSTER_PATH_URL + poster_path;
     }
-
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public String getTitle() {
-        return title;
-    }
+    public String getName() {return name; }
 
 }

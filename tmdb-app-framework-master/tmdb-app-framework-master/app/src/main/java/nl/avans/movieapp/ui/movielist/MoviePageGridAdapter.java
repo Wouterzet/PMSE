@@ -65,7 +65,7 @@ public class MoviePageGridAdapter
         if (movie.getTitle() != null) {
             holder.mMovieRating.setText(movie.getVote_average().toString());
         }
-        Log.d(LOG_TAG, "onBindViewHolder: " + movie);
+        Log.d(LOG_TAG, "onBindViewHolder: " + movie.toString());
     }
 
     @Override

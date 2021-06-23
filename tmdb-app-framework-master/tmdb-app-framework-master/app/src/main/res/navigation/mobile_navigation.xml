@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_movies" />
     <fragment
         android:id="@+id/nav_tv"
-        android:name="nl.avans.movieapp.ui.tvshowlist.TvShowListFragment"
+        android:name="nl.avans.movieapp.ui.tv.TvFragment"
         android:label="@string/menu_tv"
-        tools:layout="@layout/fragment_tv_shows" />
+        tools:layout="@layout/fragment_tvshows" />
 </navigation>
