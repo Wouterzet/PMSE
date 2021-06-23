@@ -22,14 +22,14 @@ import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
-public class MovieListFragment extends Fragment
-        implements MovieListGridAdapter.OnMovieSelectionListener {
+public class MoviePageFragment extends Fragment
+        implements MoviePageGridAdapter.OnMovieSelectionListener {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
-    private MovieListViewModel movieListViewModel;
+    private MoviePageViewModel moviePageViewModel;
     private ArrayList<Movie> mMovies = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private MovieListGridAdapter mMoviesGridAdapter;
+    private MoviePageGridAdapter mMoviesGridAdapter;
 
     private static final int ONE_COLUMN = 1;
 
@@ -43,11 +43,11 @@ public class MovieListFragment extends Fragment
                 container.getContext(), numGridColumns);
         mRecyclerView = root.findViewById(R.id.home_movies_grid);
         mRecyclerView.setLayoutManager(layoutManager);
-        mMoviesGridAdapter = new MovieListGridAdapter(this);
+        mMoviesGridAdapter = new MoviePageGridAdapter(this);
         mRecyclerView.setAdapter(mMoviesGridAdapter);
 
-        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
-        movieListViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
+        moviePageViewModel = new ViewModelProvider(this).get(MoviePageViewModel.class);
+        moviePageViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<ArrayList<Movie>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Movie> movies) {
                 Log.d(LOG_TAG, "onChanged");

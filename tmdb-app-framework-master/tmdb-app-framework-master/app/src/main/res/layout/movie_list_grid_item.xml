@@ -8,10 +8,12 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5sp"
-        android:layout_marginLeft="5sp">
+        android:layout_marginRight="5sp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="150sp"
@@ -30,26 +32,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:text="Test"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-            android:id="@+id/home_movies_griditem_lenghtText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:textSize="16sp"
-            android:text="Lengte: "/>
-            <TextView
-                android:id="@+id/home_movies_griditem_lenght"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textSize="16sp"
-                android:text="[voorbeeld]"/>
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -87,7 +69,18 @@
                 android:textSize="16sp"
                 android:text="[voorbeeld]"/>
         </LinearLayout>
-
-
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/home_movies_griditem_lenght"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="5sp"
+            android:textSize="14sp"
+            android:text="[voorbeeld]"/>
+    </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

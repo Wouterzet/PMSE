@@ -11,12 +11,12 @@ import androidx.lifecycle.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.avans.movieapp.controller.MovieController;
+import nl.avans.movieapp.controller.MoviePageController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.repository.MovieRepository;
 
-public class MovieListViewModel extends AndroidViewModel
-        implements MovieController.MovieControllerListener{
+public class MoviePageViewModel extends AndroidViewModel
+        implements MoviePageController.MoviePageControllerListener{
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
@@ -24,7 +24,7 @@ public class MovieListViewModel extends AndroidViewModel
     private MovieRepository mMovieRepository;
     private Application application;
 
-    public MovieListViewModel(Application application) {
+    public MoviePageViewModel(Application application) {
         super(application);
         this.application = application;
         this.mPageNr = new MutableLiveData<>(1);
@@ -44,11 +44,11 @@ public class MovieListViewModel extends AndroidViewModel
         return mMovies;
     }
 
-    private void loadMovies(MovieController.MovieControllerListener listener){
+    private void loadMovies(MoviePageController.MoviePageControllerListener listener){
         // Do an asynchronous operation to fetch movies
         Log.d(LOG_TAG, "loadMovies");
-        MovieController movieController = new MovieController(listener);
-        movieController.loadTrendingMoviesPerWeek(this.mPageNr.getValue());
+        MoviePageController moviePageController = new MoviePageController(listener);
+        moviePageController.loadLatestMovies(this.mPageNr.getValue());
     }
 
     @Override

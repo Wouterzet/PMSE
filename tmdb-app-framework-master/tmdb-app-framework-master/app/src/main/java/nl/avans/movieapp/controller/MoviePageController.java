@@ -2,37 +2,33 @@ package nl.avans.movieapp.controller;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+
 import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.service.CommentApiResponse;
-import nl.avans.movieapp.service.MovieApiResponse;
 import nl.avans.movieapp.service.MovieAPI;
+import nl.avans.movieapp.service.MovieApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MovieController
-        extends BaseMovieAppController
+public class MoviePageController extends BaseMovieAppController
         implements Callback<MovieApiResponse> {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
 
-    private MovieControllerListener listener;
+    private MoviePageControllerListener listener;
     private final MovieAPI movieAPI;
 
-    public MovieController(MovieControllerListener listener) {
+    public MoviePageController(MoviePageControllerListener listener) {
         super();
         this.listener = listener;
         movieAPI = retrofit.create(MovieAPI.class);
     }
 
-    public void loadTrendingMoviesPerWeek(int pageNr) {
-        Call<MovieApiResponse> call = movieAPI.loadTrendingMoviesByWeek(pageNr);
+    public void loadLatestMovies(int pageNr) {
+        Call<MovieApiResponse> call = movieAPI.loadLatestMovies(1);
         call.enqueue(this);
     }
 
@@ -57,7 +53,7 @@ public class MovieController
         listener.onError(t.getMessage());
     }
 
-    public interface MovieControllerListener {
+    public interface MoviePageControllerListener {
         void onMoviesAvailable(List<Movie> movies);
         void onError(String message);
     }
