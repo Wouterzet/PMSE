@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="5sp"
+    android:layout_marginBottom="15sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5sp"
+        android:layout_marginLeft="5sp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150sp"
+            android:background="@android:color/transparent"
+            android:id="@+id/home_movies_griditem_imageurl"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/home_movies_griditem_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Test"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+            android:id="@+id/home_movies_griditem_lenghtText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="16sp"
+            android:text="Lengte: "/>
+            <TextView
+                android:id="@+id/home_movies_griditem_lenght"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:text="[voorbeeld]"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/home_movies_griditem_releaseYearText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:text="Jaar van uitkomst: "/>
+            <TextView
+                android:id="@+id/home_movies_griditem_releaseYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:text="[voorbeeld]"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/home_movies_griditem_ratingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:text="Rating: "/>
+            <TextView
+                android:id="@+id/home_movies_griditem_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:text="[voorbeeld]"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
