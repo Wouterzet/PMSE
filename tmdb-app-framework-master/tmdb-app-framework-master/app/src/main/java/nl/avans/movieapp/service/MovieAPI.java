@@ -1,5 +1,7 @@
 package nl.avans.movieapp.service;
 
+import android.util.Log;
+
 import nl.avans.movieapp.domain.MovieList;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,8 +18,8 @@ public interface MovieAPI {
     @GET("trending/movie/week?api_key=" + API_KEY)
     Call<MovieApiResponse> loadTrendingMoviesByWeek(@Query("page") int pageNr);
 
-    @GET("movie/{id}?api_key=" + API_KEY)
-    Call<MovieApiResponse> loadMovieById(@Path("id")int id);
+    @GET("movie/{movie_id}/reviews?api_key=" + API_KEY)
+    Call<CommentApiResponse> loadMovieCommentsById(@Path("movie_id") int id);
 
     @GET("account/{account_id}/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListsApiResponse> loadMovieListsForUser();

@@ -15,6 +15,7 @@ import nl.avans.movieapp.domain.Movie;
 @Database(entities = {Movie.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MovieDao movieDao();
+//    public abstract CommentDao commentDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
