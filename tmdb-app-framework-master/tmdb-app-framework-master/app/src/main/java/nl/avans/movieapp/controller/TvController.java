@@ -41,7 +41,7 @@ public class TvController
     }
 
 
-    public void loadTvCommentsById(){
+    public void loadTvShows(){
         Call<TvApiResponse> call = tvAPI.loadTrendingTv();
         call.enqueue(this);
     }
