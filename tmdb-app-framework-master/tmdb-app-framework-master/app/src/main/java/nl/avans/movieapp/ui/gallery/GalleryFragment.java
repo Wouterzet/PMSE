@@ -1,6 +1,9 @@
 package nl.avans.movieapp.ui.gallery;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,8 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListsController;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
-public class GalleryFragment extends Fragment {
+public class GalleryFragment extends Fragment implements MovieListAdapter.OnListSelectionListener, Serializable {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
 
@@ -36,7 +41,7 @@ public class GalleryFragment extends Fragment {
         int numGridColumns = 1;
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(container.getContext(), numGridColumns);
         mRecyclerView.setLayoutManager(layoutManager);
-        movieListAdapter = new MovieListAdapter(movieLists);
+        movieListAdapter = new MovieListAdapter(movieLists,this);
         mRecyclerView.setAdapter(movieListAdapter);
 
         // Call API request
@@ -57,6 +62,15 @@ public class GalleryFragment extends Fragment {
 
 
         return root;
+    }
+
+    @Override
+    public void onListSelected(int position) {
+        Log.d(LOG_TAG, "Lijst kan je ook klikken " + position);
+//
+        Intent intent = new Intent(getContext(), MovieListDetailActivity.class);
+        intent.putExtra("List", (Serializable) movieLists.get(position));
+        getContext().startActivity(intent);
     }
 
 //    @Override

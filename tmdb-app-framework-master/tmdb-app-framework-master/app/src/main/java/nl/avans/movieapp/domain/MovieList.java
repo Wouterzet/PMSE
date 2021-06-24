@@ -1,14 +1,27 @@
 package nl.avans.movieapp.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MovieList {
+public class MovieList implements Serializable {
 
     private String name;
     private String description;
     private int id;
     private ArrayList<Movie> items;
     private int item_count;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<Movie> getItems() {
+        return items;
+    }
 
     public MovieList(String name, String description, int id, ArrayList<Movie> items, int item_count) {
         this.name = name;

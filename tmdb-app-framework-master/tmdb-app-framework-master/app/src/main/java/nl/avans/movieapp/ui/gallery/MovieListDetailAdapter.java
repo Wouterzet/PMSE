@@ -13,25 +13,28 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
+import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.controller.MovieListsController;
+import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
 
 /**
  *
  */
-public class MovieListAdapter
-        extends RecyclerView.Adapter<MovieListAdapter.MovieListsViewHolder>
-        implements MovieListsController.MovieListsControllerListener, Serializable
+public class MovieListDetailAdapter
+        extends RecyclerView.Adapter<MovieListDetailAdapter.MovieListsViewHolder>
+        implements MovieListSpecController.MovieListsSpecControllerListener, Serializable
 {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
-    private final ArrayList<MovieList> movieLists;
-    private final OnListSelectionListener listener;
-    public MovieListAdapter(ArrayList<MovieList> movieLists, OnListSelectionListener listener) {
+    private final MovieList movieLists;
+    private final ArrayList<Movie> movieArrayList = new ArrayList<>();
+
+    public MovieListDetailAdapter(MovieList movieLists) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
         this.movieLists = movieLists;
-        this.listener = listener;
+        ArrayList movieArrayList = movieLists.getItems();
     }
 
     @NonNull
@@ -39,40 +42,36 @@ public class MovieListAdapter
     public MovieListsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(LOG_TAG, "onCreate aangeroepen");
 
-        int layoutIdForListItem = R.layout.gallery_movielist_item;
+        int layoutIdForListItem = R.layout.movie_list_item;
         final boolean shouldAttachToParentImmediately = false;
-
+        ArrayList movieArrayList = movieLists.getItems();
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new MovieListsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieListsViewHolder holder, int position) {
-        MovieList movieList = movieLists.get(position);
-        Log.d(LOG_TAG, movieList.toString());
+        Movie movie = movieArrayList.get(position);
+        Log.d(LOG_TAG, movie.toString());
 
-        holder.movieListName.setText(movieList.getName());
+        holder.movieListName.setText(movie.getTitle());
+        Log.d(LOG_TAG, movie.toString());
+
     }
 
     @Override
     public int getItemCount() {
-        return movieLists.size();
+        return movieArrayList.size();
     }
 
     @Override
-    public void onMovieListsAvailable(List<MovieList> movieLists) {
-        Log.d(LOG_TAG, "We have " + movieLists.size() + " items");
-        this.movieLists.clear();
-        this.movieLists.addAll(movieLists);
+    public void onMovieListsAvailable(MovieList movieLists) {
+        Log.d(LOG_TAG, "We have " + movieLists.getItems() + " items");
+        this.movieArrayList.clear();
+        this.movieArrayList.addAll(movieLists.getItems());
         notifyDataSetChanged();
     }
 
-    @Override
-    public void onMovieListCreated(MovieList newMovieList) {
-        Log.d(LOG_TAG, "onMovieListCreated " + newMovieList.toString());
-        this.movieLists.add(newMovieList);
-        notifyDataSetChanged();
-    }
 
     /**
      *
@@ -83,17 +82,14 @@ public class MovieListAdapter
 
         public MovieListsViewHolder(@NonNull View itemView) {
             super(itemView);
-            movieListName = (TextView) itemView.findViewById(R.id.gallery_movielists_listname);
+            movieListName = (TextView) itemView.findViewById(R.id.tv_movielist_griditem_textview);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-                listener.onListSelected(getAdapterPosition());
+
 
         }
-    }
-    public interface OnListSelectionListener {
-        void onListSelected(int position);
     }
 }
