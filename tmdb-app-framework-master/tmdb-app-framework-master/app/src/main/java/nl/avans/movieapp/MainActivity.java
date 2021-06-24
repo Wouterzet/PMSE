@@ -59,9 +59,27 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onOptionsItemSelected");
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.menu_action_settings:
-                Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(settingsIntent);
+            case R.id.filter_on_genre_western:
+            case R.id.filter_on_genre_war:
+            case R.id.filter_on_genre_thriller:
+            case R.id.filter_on_genre_science_fiction:
+            case R.id.filter_on_genre_romance:
+            case R.id.filter_on_genre_mystery:
+            case R.id.filter_on_genre_music:
+            case R.id.filter_on_genre_horror:
+            case R.id.filter_on_genre_history:
+            case R.id.filter_on_genre_fantasy:
+            case R.id.filter_on_genre_family:
+            case R.id.filter_on_genre_drama:
+            case R.id.filter_on_genre_documentary:
+            case R.id.filter_on_genre_crime:
+            case R.id.filter_on_genre_comedy:
+            case R.id.filter_on_genre_animation:
+            case R.id.filter_on_genre_adventure:
+            case R.id.filter_on_genre_action:
+
+            case R.id.filter_on_genre_all:
+
                 return true;
 
             default:
