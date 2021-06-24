@@ -26,13 +26,14 @@ import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 import nl.avans.movieapp.ui.slideshow.SlideshowViewModel;
+import nl.avans.movieapp.ui.tvDetail.TvDetailActivity;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
 public class TvFragment
         extends Fragment
-        implements TvGridAdapter.OnMovieSelectionListener {
+        implements TvGridAdapter.OnTVselectionListener {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
 
@@ -53,7 +54,7 @@ public class TvFragment
                 container.getContext(), numGridColumns);
         mRecyclerView = root.findViewById(R.id.Recycler_View_tvshows);
         mRecyclerView.setLayoutManager(layoutManager);
-        mMoviesGridAdapter = new TvGridAdapter();
+        mMoviesGridAdapter = new TvGridAdapter(this);
         mRecyclerView.setAdapter(mMoviesGridAdapter);
 
         homeViewModel = new ViewModelProvider(this).get(TvViewModel.class);
@@ -75,11 +76,11 @@ public class TvFragment
     }
 
     @Override
-    public void onMovieSelected(int position) {
+    public void onTVSelected(int position) {
         Log.d(LOG_TAG, "onMovieSelected at pos " + position);
 
-        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-        intent.putExtra("Movie", mMovies.get(position));
+        Intent intent = new Intent(getContext(), TvDetailActivity.class);
+        intent.putExtra("Tv", mMovies.get(position));
         getContext().startActivity(intent);
     }
 

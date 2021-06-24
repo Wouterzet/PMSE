@@ -19,7 +19,7 @@ public interface TvAPI {
     Call<TvApiResponse> loadTrendingTv();
 
     @GET("tv/{tv_id}?api_key=" + API_KEY)
-    Call<TvApiResponse> loadTvCommentsById(@Path("tv_id") int id);
+    Call<TvDetailApiResponse> loadTvById(@Path("tv_id") int id);
 
     @GET("account/{account_id}/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListsApiResponse> loadMovieListsForUser();
