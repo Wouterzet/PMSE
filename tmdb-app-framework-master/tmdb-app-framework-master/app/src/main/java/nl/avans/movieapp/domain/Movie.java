@@ -25,9 +25,6 @@ public class Movie implements Serializable {
     private Boolean adult;
 
     private String release_date;
-
-    private int runtime;
-
     @NonNull
     private String title;
 
@@ -41,7 +38,6 @@ public class Movie implements Serializable {
             @NonNull String backdrop_path,
             Boolean adult,
             String release_date,
-            int runtime,
             @NonNull String overview,
             Double vote_average,
             @NonNull String title
@@ -54,7 +50,6 @@ public class Movie implements Serializable {
         this.title = title;
         this.backdrop_path = /* MovieController.BASE_POSTER_PATH_URL + */ backdrop_path;
         this.release_date = release_date;
-        this.runtime = runtime;
     }
 
     @Override
@@ -62,7 +57,6 @@ public class Movie implements Serializable {
         return "Movie{" +
                 "id=" + id +
                 ", poster_path='" + poster_path + '\'' +
-                ", runtime='" + runtime + '\'' +
                 ", adult=" + adult +
                 ", title='" + title + '\'' +
                 ", backdrop_path='" + backdrop_path + '\'' +
@@ -94,9 +88,5 @@ public class Movie implements Serializable {
 
     public String getRelease_date() {
         return release_date;
-    }
-
-    public int getRuntime() {
-        return runtime;
     }
 }

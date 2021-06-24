@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,10 +37,15 @@ private TextView mTitle;
 private ImageView mBanner;
 private  TextView mOverview;
 private  TextView mRating;
+private  TextView mGenre;
+private  TextView mRuntime;
+private  TextView mCountry;
+private  TextView mReleaseYear;
 private RecyclerView mRecyclerView;
 private CommentGridAdapter mCommentGridAdapter;
-    private CommentViewModel commentViewModel;
-    private ArrayList<Comment> mMovies = new ArrayList<>();
+private CommentViewModel commentViewModel;
+private ArrayList<Comment> mMovies = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,13 +82,21 @@ private CommentGridAdapter mCommentGridAdapter;
         mOverview.setText(m.getOverview());
         mRating = (TextView) findViewById(R.id.tv_rating);
         mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
+        mGenre = (TextView) findViewById(R.id.tv_genre);
+        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
+        mRuntime = (TextView) findViewById(R.id.tv_runtime);
+        mRuntime.setText(String.valueOf("Runtime: "+m.getVote_average()));
+        mCountry = (TextView) findViewById(R.id.tv_country);
+        mCountry.setText(String.valueOf("Country: "+m.getVote_average()));
+        mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
+        mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
         Picasso.get()
                 .load(m.getBackdrop_path())
                 .resize(1200, 750)
                 .centerInside()
                 .into(mBanner);
         Log.d("Test", m.toString());
-
+        mRecyclerView.setHasFixedSize(true);
 
 
 

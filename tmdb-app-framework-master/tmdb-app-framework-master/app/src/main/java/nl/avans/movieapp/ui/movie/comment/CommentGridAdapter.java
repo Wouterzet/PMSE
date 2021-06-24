@@ -23,6 +23,7 @@ public class CommentGridAdapter
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final ArrayList<Comment> moviesArrayList = new ArrayList<>();
+    private int MIN_LENGHT = 100;
 
     public CommentGridAdapter() {
         Log.d(LOG_TAG, "Constructor aangeroepen");
@@ -43,13 +44,15 @@ public class CommentGridAdapter
     @Override
     public void onBindViewHolder(@NonNull CommentGridViewholder holder, int position) {
         Comment movie = moviesArrayList.get(position);
-        // Log.d(LOG_TAG, "onBindViewHolder");
-
-
-            holder.mUsername.setText(movie.getAuthor());
-            holder.mUserComment.setText(movie.getContent());
-
-
+        holder.mUsername.setText(movie.getAuthor());
+        holder.mUserComment.setText(movie.getContent().substring(0, MIN_LENGHT));
+        holder.mUserComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.isExpanded = ! holder.isExpanded;
+                holder.mUserComment.setText(holder.isExpanded?movie.getContent():movie.getContent().substring(0,MIN_LENGHT));
+            }
+        });
     }
 
     @Override
@@ -68,14 +71,13 @@ public class CommentGridAdapter
 
         public TextView mUsername;
         public TextView mUserComment;
+        public boolean isExpanded;
 
         public CommentGridViewholder(@NonNull View itemView) {
             super(itemView);
             mUsername = (TextView) itemView.findViewById(R.id.tv_comment_username);
             mUserComment = (TextView) itemView.findViewById(R.id.tv_comment_content);
-
             itemView.setOnClickListener(this);
-
         }
 
         @Override
