@@ -56,7 +56,7 @@ public class TvGridAdapter
             holder.mTitle.setText(movie.getName());
         }
             holder.mSeasons.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
-            holder.mDate.setText(movie.getFirst_air_date());
+            holder.mDate.setText(movie.getFirst_air_date().substring(0,4));
             Log.d("Test", movie.toString());
     }
 

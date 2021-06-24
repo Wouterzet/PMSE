@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:textSize="16sp"
-                    android:text="Datum van uitkomst: "/>
+                    android:text="Jaar van uitkomst: "/>
                 <TextView
                     android:id="@+id/tv_tv__griditem_releaseYear"
                     android:layout_width="wrap_content"
