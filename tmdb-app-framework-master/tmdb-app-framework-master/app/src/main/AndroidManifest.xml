@@ -17,6 +17,9 @@
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
+            android:name=".ui.tvDetail.TvDetailActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".ui.movie.MovieDetailActivity"
             android:label="@string/title_activity_settings" />
         <activity

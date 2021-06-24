@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Tv;
+import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
 
 /**
  *
@@ -24,8 +25,10 @@ public class TvGridAdapter
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final ArrayList<Tv> moviesArrayList = new ArrayList<>();
+    private final TvGridAdapter.OnTVselectionListener listener;
 
-    public TvGridAdapter() {
+    public TvGridAdapter(TvGridAdapter.OnTVselectionListener listener) {
+        this.listener = listener;
         Log.d(LOG_TAG, "Constructor aangeroepen");
     }
 
@@ -91,10 +94,10 @@ public class TvGridAdapter
 
         @Override
         public void onClick(View v) {
-
+            listener.onTVSelected(getAdapterPosition());
         }
     }
-    public interface OnMovieSelectionListener {
-        void onMovieSelected(int position);
+    public interface OnTVselectionListener {
+        void onTVSelected(int position);
     }
 }
