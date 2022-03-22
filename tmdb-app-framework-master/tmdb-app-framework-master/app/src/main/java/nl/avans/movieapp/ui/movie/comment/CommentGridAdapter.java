@@ -45,12 +45,16 @@ public class CommentGridAdapter
     public void onBindViewHolder(@NonNull CommentGridViewholder holder, int position) {
         Comment movie = moviesArrayList.get(position);
         holder.mUsername.setText(movie.getAuthor());
-        holder.mUserComment.setText(movie.getContent().substring(0, MIN_LENGHT));
+        if(movie.getContent().length() > 100) {
+            holder.mUserComment.setText(movie.getContent().substring(0, MIN_LENGHT));
+        } else {
+            holder.mUserComment.setText(movie.getContent());
+        }
         holder.mUserComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.isExpanded = ! holder.isExpanded;
-                holder.mUserComment.setText(holder.isExpanded?movie.getContent():movie.getContent().substring(0,MIN_LENGHT));
+                holder.mUserComment.setText(holder.isExpanded?movie.getContent():movie.getContent().substring(0,100));
             }
         });
     }

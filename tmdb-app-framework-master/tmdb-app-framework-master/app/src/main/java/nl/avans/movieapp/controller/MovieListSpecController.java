@@ -66,6 +66,7 @@ public class MovieListSpecController implements Callback<MovieListSpecApiRespons
 
             // Deserialization
             MovieList movieLists = response.body().getResults();
+            Log.d("Laatse kans", movieLists.toString());
             listener.onMovieListsAvailable(movieLists);
         } else {
             Log.e(LOG_TAG, "Not successful! Message: " + response.message());

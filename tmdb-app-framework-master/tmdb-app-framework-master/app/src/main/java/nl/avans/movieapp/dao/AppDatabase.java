@@ -8,14 +8,17 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.domain.Tv;
 
 /**
  * Zie ook https://developer.android.com/codelabs/android-room-with-a-view
  */
-@Database(entities = {Movie.class}, version = 1)
+@Database(entities = {Movie.class, Tv.class}, version = 1)
+
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MovieDao movieDao();
-//    public abstract CommentDao commentDao();
+    public abstract TvDao tvDao();
+    public abstract CommentDao commentDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -29,6 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "movie_app_database")
                             .build();
+
                 }
             }
         }

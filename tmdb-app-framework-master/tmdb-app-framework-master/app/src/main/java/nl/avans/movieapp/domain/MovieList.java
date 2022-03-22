@@ -10,20 +10,26 @@ public class MovieList implements Serializable {
     private int id;
     private ArrayList<Movie> items;
     private int item_count;
-
-    public String getDescription() {
-        return description;
-    }
+    private String created_by;
 
     public int getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public ArrayList<Movie> getItems() {
         return items;
     }
 
-    public MovieList(String name, String description, int id, ArrayList<Movie> items, int item_count) {
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public MovieList(String name, String description, int id, ArrayList<Movie> items, int item_count, String created_by) {
+        this.created_by = created_by;
         this.name = name;
         this.description = description;
         this.id = id;
@@ -33,7 +39,7 @@ public class MovieList implements Serializable {
 
     // To create a new MovieList
     public MovieList(String name, String description) {
-        this(name, description, 0, null, 0);
+        this(name, description, 0, null, 0,null);
     }
 
     public String getName() {
@@ -48,7 +54,7 @@ public class MovieList implements Serializable {
     public String toString() {
         return "MovieList{" +
                 "name='" + name + '\'' +
-                ", id=" + id +
+                ", id=" + id + "Test"+ created_by+
                 '}';
     }
 }

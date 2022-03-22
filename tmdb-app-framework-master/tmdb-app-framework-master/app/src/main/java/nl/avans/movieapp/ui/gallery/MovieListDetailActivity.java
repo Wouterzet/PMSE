@@ -47,7 +47,7 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
     private MovieList m;
     private RecyclerView mRecyclerView;
     private MovieListDetailAdapter movieListAdapter;
-    private final MovieList movieLists = new MovieList("name", "String description", 2, new ArrayList<>() ,2);
+    private final MovieList movieLists = new MovieList("name", "String description", 2, new ArrayList<>() ,2, "Henk");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +61,15 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         mTitle.setText(m.getName());
         Log.d("Testn",String.valueOf(m.getName()));
 
-        int numGridColumns = 1;
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, numGridColumns);
-        mRecyclerView.setLayoutManager(layoutManager);
-        movieListAdapter = new MovieListDetailAdapter(movieLists);
-        mRecyclerView.setAdapter(movieListAdapter);
+//        int numGridColumns = 1;
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, numGridColumns);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        movieListAdapter = new MovieListDetailAdapter(movieLists);
+//        mRecyclerView.setAdapter(movieListAdapter);
 
         // Call API request
-        MovieListsController movieListsController = new MovieListsController(movieListAdapter);
-        movieListsController.loadMovieListsForUser();
+//        MovieListsController movieListsController = new MovieListsController(movieListAdapter);
+//        movieListsController.loadMovieListsForUser();
 //        commentViewModel = new ViewModelProvider(this).get(TvDetailViewModel.class);
 //        commentViewModel.setId(m.getId());
 //        Log.d("MovieID", String.valueOf(m.getId()));
