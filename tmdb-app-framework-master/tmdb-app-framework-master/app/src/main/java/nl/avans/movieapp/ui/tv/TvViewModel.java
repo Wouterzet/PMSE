@@ -21,14 +21,15 @@ import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
 import nl.avans.movieapp.repository.MovieRepository;
+import nl.avans.movieapp.repository.TvRepository;
 
 public class TvViewModel extends AndroidViewModel
         implements TvController.TvControllerListener {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
-    private MutableLiveData<ArrayList<Tv>> mMovies = null;
-
+    private MutableLiveData<ArrayList<Tv>> mTvShows = null;
+    private TvRepository mTvRepo;
     private Application application;
     private int id;
 
@@ -36,6 +37,7 @@ public class TvViewModel extends AndroidViewModel
         super(application);
         this.application = application;
         this.mPageNr = new MutableLiveData<>(1);
+        this.mTvRepo = new TvRepository(application);
     }
 
     public void setId(int id) {
@@ -48,34 +50,37 @@ public class TvViewModel extends AndroidViewModel
 
     public LiveData<ArrayList<Tv>> getMovies() {
         Log.d(LOG_TAG, "getMovies");
-        if(mMovies == null) {
-            mMovies = new MutableLiveData<>();
-            loadMovies(this);
+        if(mTvShows == null) {
+            mTvShows = new MutableLiveData<>();
+            loadTvShows(this);
         }
-        return mMovies;
+        return mTvShows;
     }
 // Deze moet ik nameken denl
 
-    private void loadMovies(TvController.TvControllerListener listener){
+    private void loadTvShows(TvController.TvControllerListener listener){
         // Do an asynchronous operation to fetch movies
         Log.d(LOG_TAG, "loadMovies");
-        TvController movieController = new TvController(listener);
-        movieController.loadTvShows();
+        TvController tvController = new TvController(listener);
+        tvController.loadTvShows();
         Log.d("MovieID", String.valueOf(id));
     }
 
     @Override
-    public void onMoviesAvailable(List<Tv> movies) {
-        this.mMovies.setValue((ArrayList<Tv>) movies);
+    public void onMoviesAvailable(List<Tv> tvShows) {
+        this.mTvShows.setValue((ArrayList<Tv>) tvShows);
         // Save in the database
+        this.mTvRepo.clear();
+        this.mTvRepo.insertAll(tvShows);
 
     }
 
     Observer observer = new Observer<List<Tv>>() {
         @Override
-        public void onChanged(List<Tv> movies) {
-            Log.d(LOG_TAG, "getAllMovies().onChanged() - movies = " + movies.toString());
-            mMovies.setValue((ArrayList<Tv>) movies);
+        public void onChanged(List<Tv> tvShows) {
+            Log.d(LOG_TAG, "getAllMovies().onChanged() - movies = " + tvShows.toString());
+            mTvShows.setValue((ArrayList<Tv>) tvShows);
+
         }
     };
 
@@ -85,13 +90,13 @@ public class TvViewModel extends AndroidViewModel
         Log.w(LOG_TAG, "Error occurred getting the movies: " + message);
         // No connection to the internet? Get movies from the database.
         // Use observeForever since we do not have access to getLifeCycleOwner()
-
+        this.mTvRepo.getAllTvShows().observeForever(observer);
     }
 
     @Override
     protected void onCleared() {
         // Important! Clean up the observeForever call!
-
+        this.mTvRepo.getAllTvShows().removeObserver(observer);
         super.onCleared();
     }
 }
