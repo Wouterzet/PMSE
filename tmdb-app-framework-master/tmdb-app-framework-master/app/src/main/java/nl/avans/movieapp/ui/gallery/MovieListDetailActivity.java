@@ -61,11 +61,11 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         mTitle.setText(m.getName());
         Log.d("Testn",String.valueOf(m.getName()));
 
-//        int numGridColumns = 1;
-//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, numGridColumns);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        movieListAdapter = new MovieListDetailAdapter(movieLists);
-//        mRecyclerView.setAdapter(movieListAdapter);
+        int numGridColumns = 1;
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, numGridColumns);
+        mRecyclerView.setLayoutManager(layoutManager);
+        movieListAdapter = new MovieListDetailAdapter(movieLists);
+        mRecyclerView.setAdapter(movieListAdapter);
 
         // Call API request
 //        MovieListsController movieListsController = new MovieListsController(movieListAdapter);
@@ -98,13 +98,13 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
 //
 //
 //
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
    }
 }
