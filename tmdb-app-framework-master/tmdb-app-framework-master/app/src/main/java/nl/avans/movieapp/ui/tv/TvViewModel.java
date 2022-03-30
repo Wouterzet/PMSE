@@ -56,7 +56,7 @@ public class TvViewModel extends AndroidViewModel
         }
         return mTvShows;
     }
-// Deze moet ik nameken denl
+// Deze moet ik namaken
 
     private void loadTvShows(TvController.TvControllerListener listener){
         // Do an asynchronous operation to fetch movies
