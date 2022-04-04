@@ -31,8 +31,7 @@ import nl.avans.movieapp.controller.TvSpecController;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
-import nl.avans.movieapp.ui.home.HomeGridAdapter;
-import nl.avans.movieapp.ui.home.HomeViewModel;
+
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
 import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
 import nl.avans.movieapp.ui.tv.TvViewModel;
