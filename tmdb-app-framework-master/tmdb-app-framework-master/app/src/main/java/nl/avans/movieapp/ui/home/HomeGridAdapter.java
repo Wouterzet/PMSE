@@ -1,7 +1,5 @@
 package nl.avans.movieapp.ui.home;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
-import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
 /**
  *
@@ -40,6 +34,7 @@ public class HomeGridAdapter
     @Override
     public MoviesGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          Log.d(LOG_TAG, "onCreateViewHolder aangeroepen");
+
 
         int layoutIdForListItem = R.layout.home_movies_grid_item;
         final boolean shouldAttachToParentImmediately = false;
@@ -69,7 +64,7 @@ public class HomeGridAdapter
         return moviesArrayList.size();
     }
 
-    public void setMovieList(List<Movie> movies) {
+    public void setMovieList(ArrayList<Movie> movies) {
         Log.d(LOG_TAG, "setMovieList");
         this.moviesArrayList.clear();
         this.moviesArrayList.addAll(movies);
