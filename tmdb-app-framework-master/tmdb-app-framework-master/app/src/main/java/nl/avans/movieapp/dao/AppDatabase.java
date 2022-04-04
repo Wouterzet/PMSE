@@ -7,13 +7,15 @@ import java.util.concurrent.Executors;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
 
 /**
  * Zie ook https://developer.android.com/codelabs/android-room-with-a-view
  */
-@Database(entities = {Movie.class, Tv.class}, version = 1)
+@Database(entities = {Movie.class, Tv.class, Comment.class}, version = 1)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MovieDao movieDao();

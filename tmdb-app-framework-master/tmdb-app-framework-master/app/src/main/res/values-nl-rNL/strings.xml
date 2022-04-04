@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AvansMovieApp</string>
+    <string name="navigation_drawer_open">Open navigatie menu</string>
+    <string name="navigation_drawer_close">Sluit navigatie menu</string>
+    <string name="nav_header_title">Gebruikers naam</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="menu_home">Thuis</string>
+    <string name="menu_list">Lijst</string>
+    <string name="menu_movies">Films</string>
+    <string name="messages_header">Berichten</string>
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="dialog_create_movielist_message">Naam van de nieuwe lijst?</string>
+    <string name="dialog_create_movielist_title">Maak nieuwe lijst</string>
+    <string name="country">Land</string>
+</resources>

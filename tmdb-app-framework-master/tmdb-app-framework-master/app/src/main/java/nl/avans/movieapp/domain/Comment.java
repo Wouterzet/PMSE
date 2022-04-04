@@ -16,6 +16,7 @@ public class Comment implements Serializable {
     // Je kunt die attribuutname ook aanpassen, maar dat vraagt finetuning.
 
     @PrimaryKey
+    @NonNull
     private String id;
 
     @NonNull
