@@ -79,15 +79,6 @@
                 </menu>
             </item>
 
-            <item
-                android:id="@+id/filter_on_rating"
-                android:title="Rating"
-                app:showAsAction="never"/>
-
-            <item
-                android:id="@+id/filter_on_date"
-                android:title="Date"
-                app:showAsAction="never"/>
         </menu>
     </item>
 
@@ -127,9 +118,9 @@
         </menu>
     </item>
 
-    <item android:id="@+id/search"
+    <item android:id="@+id/action_search"
         android:title="search"
         app:showAsAction="always|collapseActionView"
-        app:actionViewClass="android.widget.SearchView" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
 </menu>

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private final String LOG_TAG = this.getClass().getSimpleName();
+
+    public View getCurrentView() {
+        return this.getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Enter Title");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(LOG_TAG, getCurrentView().getClass().getSimpleName());
+                return false;
+            }
+        });
         return true;
     }
 
@@ -77,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.filter_on_genre_animation:
             case R.id.filter_on_genre_adventure:
             case R.id.filter_on_genre_action:
-
             case R.id.filter_on_genre_all:
 
                 return true;

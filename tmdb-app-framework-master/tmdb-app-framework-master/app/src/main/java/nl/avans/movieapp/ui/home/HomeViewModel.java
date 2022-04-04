@@ -45,7 +45,7 @@ public class HomeViewModel extends AndroidViewModel
         }
         return mMovies;
     }
-// Deze moet ik nameken denl
+// Deze moet ik namaken denk
 
     private void loadMovies(MovieController.MovieControllerListener listener){
         // Do an asynchronous operation to fetch movies
