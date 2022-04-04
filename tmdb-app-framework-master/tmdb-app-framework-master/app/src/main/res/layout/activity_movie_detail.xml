@@ -21,6 +21,7 @@
             app:popupTheme="@style/Theme.AvansMovieApp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <include layout="@layout/content_movie_detail" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

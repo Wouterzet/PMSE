@@ -18,6 +18,7 @@ import nl.avans.movieapp.controller.CommentController;
 import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.repository.CommentRepository;
 import nl.avans.movieapp.repository.MovieRepository;
 
 public class CommentViewModel extends AndroidViewModel
@@ -25,7 +26,8 @@ public class CommentViewModel extends AndroidViewModel
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
-    private MutableLiveData<ArrayList<Comment>> mMovies = null;
+    private MutableLiveData<ArrayList<Comment>> mComments = null;
+    private CommentRepository mCommentRepository;
 
     private Application application;
     private int id;
@@ -34,6 +36,7 @@ public class CommentViewModel extends AndroidViewModel
         super(application);
         this.application = application;
         this.mPageNr = new MutableLiveData<>(1);
+        this.mCommentRepository = new CommentRepository(application);
     }
 
     public void setId(int id) {
@@ -46,50 +49,53 @@ public class CommentViewModel extends AndroidViewModel
 
     public LiveData<ArrayList<Comment>> getMovies() {
         Log.d(LOG_TAG, "getMovies");
-        if(mMovies == null) {
-            mMovies = new MutableLiveData<>();
+        if(mComments == null) {
+            mComments = new MutableLiveData<>();
             loadMovies(this);
         }
-        return mMovies;
+        return mComments;
     }
 // Deze moet ik nameken denl
 
     private void loadMovies(CommentController.CommentControllerListener listener){
         // Do an asynchronous operation to fetch movies
         Log.d(LOG_TAG, "loadMovies");
-        CommentController movieController = new CommentController(listener);
-        movieController.loadMovieCommentsById(id,this.mPageNr.getValue());
+        CommentController commentController = new CommentController(listener);
+        commentController.loadMovieCommentsById(id,this.mPageNr.getValue());
         Log.d("MovieID", String.valueOf(id));
     }
 
     @Override
-    public void onMoviesAvailable(List<Comment> movies) {
-        this.mMovies.setValue((ArrayList<Comment>) movies);
+    public void onMoviesAvailable(List<Comment> comments) {
+        this.mComments.setValue((ArrayList<Comment>) comments);
         // Save in the database
+        this.mCommentRepository.clear();
+        this.mCommentRepository.insertAll(comments);
 
     }
 
     Observer observer = new Observer<List<Comment>>() {
         @Override
-        public void onChanged(List<Comment> movies) {
-            Log.d(LOG_TAG, "getAllMovies().onChanged() - movies = " + movies.toString());
-            mMovies.setValue((ArrayList<Comment>) movies);
+        public void onChanged(List<Comment> comments) {
+            Log.d(LOG_TAG, "getAllComments().onChanged() - movies = " + comments.toString());
+            mComments.setValue((ArrayList<Comment>) comments);
         }
     };
 
 
     @Override
     public void onError(String message) {
-        Log.w(LOG_TAG, "Error occurred getting the movies: " + message);
-        // No connection to the internet? Get movies from the database.
+        Log.w(LOG_TAG, "Error occurred getting the comments: " + message);
+        // No connection to the internet? Get comments from the database.
         // Use observeForever since we do not have access to getLifeCycleOwner()
+        this.mCommentRepository.getAllComments().observeForever(observer);
 
     }
 
     @Override
     protected void onCleared() {
         // Important! Clean up the observeForever call!
-
+        this.mCommentRepository.getAllComments().removeObserver(observer);
         super.onCleared();
     }
 }
