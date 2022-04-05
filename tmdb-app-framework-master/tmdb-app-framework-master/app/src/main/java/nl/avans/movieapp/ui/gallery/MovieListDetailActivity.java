@@ -1,6 +1,7 @@
 package nl.avans.movieapp.ui.gallery;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,11 +34,12 @@ import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.domain.Tv;
+import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
 import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
 import nl.avans.movieapp.ui.tv.TvViewModel;
 
-public class MovieListDetailActivity extends AppCompatActivity implements Serializable{
+public class MovieListDetailActivity extends AppCompatActivity implements Serializable, MovieListDetailAdapter.OnMovieSelectionListener {
     private TextView mTitle;
     private ImageView mBanner;
     private TextView mOverview;
@@ -51,18 +53,15 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         super.onCreate(savedInstanceState);
         m = (MovieList) getIntent().getSerializableExtra("List");
         setContentView(R.layout.activity_movie_list_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        String title = "Kinepolis";
+        Toolbar toolbar = findViewById(R.id.selected_movielist_toolbar);
+        toolbar.setTitle(m.getName());
         setSupportActionBar(toolbar);
-        toolbar.setTitle(title);
-        mTitle = (TextView) findViewById(R.id.tv_title_movie_list);
-        mTitle.setText(m.getName());
         Log.d("Testn",String.valueOf(m.getName()));
-
+        movieListAdapter = new MovieListDetailAdapter(m, this);
         int numGridColumns = 1;
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, numGridColumns);
+        mRecyclerView = findViewById(R.id.selected_movielist_recycler);
         mRecyclerView.setLayoutManager(layoutManager);
-        movieListAdapter = new MovieListDetailAdapter(movieLists);
         mRecyclerView.setAdapter(movieListAdapter);
 
         // Call API request
@@ -96,13 +95,13 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
 //
 //
 //
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
    }
+    @Override
+    public void onMovieSelected(int position) {
+        Log.d("Movie Selected", "onMovieSelected at pos " + position);
+
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra("Movie", m.getItems().get(position));
+        this.startActivity(intent);
+    }
 }

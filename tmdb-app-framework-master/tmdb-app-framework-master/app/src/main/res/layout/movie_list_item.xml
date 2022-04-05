@@ -18,14 +18,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="150sp"
                 android:background="@android:color/transparent"
-                android:id="@+id/home_movies_griditem_imageurl"/>
+                android:id="@+id/movielist_griditem_poster"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_movielist_griditem_textview"
+                android:id="@+id/movielist_griditem_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/home_movies_griditem_lenght"
+                    android:id="@+id/movielist_griditem_overview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left"
