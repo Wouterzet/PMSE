@@ -21,6 +21,9 @@ public interface MovieAPI {
     @GET("movie/now_playing?api_key=" + API_KEY + "&language=en-US")
     Call<MovieApiResponse> loadLatestMovies(@Query("page") int pageNr);
 
+    @GET("movie/{movie_id}/?api_key=" + API_KEY)
+    Call<MovieApiResponse> loadMovieById(@Path("movie_id") int id);
+
     @GET("movie/{movie_id}/reviews?api_key=" + API_KEY)
     Call<CommentApiResponse> loadMovieCommentsById(@Path("movie_id") int id);
 
