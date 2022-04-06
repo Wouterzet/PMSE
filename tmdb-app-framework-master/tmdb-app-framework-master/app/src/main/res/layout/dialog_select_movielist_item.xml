@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RadioButton
+        android:id="@+id/select_movielist_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/select_movielist_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="24sp"
+        android:text="Sample Text"
+        android:gravity="center_vertical"/>
+
+</LinearLayout>

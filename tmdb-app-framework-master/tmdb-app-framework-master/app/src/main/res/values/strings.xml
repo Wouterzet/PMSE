@@ -39,4 +39,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="dialog_create_movielist_title">Create new movielist</string>
     <string name="dialog_create_movielist_message">Name of your new list?</string>
+    <string name="dialog_add_to_movielist_title">Add movie to list</string>
+    <string name="dialog_add_to_movielist_message">Choose list to add movie to</string>
 </resources>
