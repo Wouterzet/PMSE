@@ -52,61 +52,61 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(title);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Enter Title");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+////        getMenuInflater().inflate(R.menu.main, menu);
+//        MenuItem menuItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) menuItem.getActionView();
+//        searchView.setQueryHint("Enter Title");
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                Log.d(LOG_TAG, getCurrentView().getClass().getSimpleName());
+//                return false;
+//            }
+//        });
+//        return true;
+//    }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d(LOG_TAG, getCurrentView().getClass().getSimpleName());
-                return false;
-            }
-        });
-        return true;
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(LOG_TAG, "onOptionsItemSelected");
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.filter_on_genre_western:
-            case R.id.filter_on_genre_war:
-            case R.id.filter_on_genre_thriller:
-            case R.id.filter_on_genre_science_fiction:
-            case R.id.filter_on_genre_romance:
-            case R.id.filter_on_genre_mystery:
-            case R.id.filter_on_genre_music:
-            case R.id.filter_on_genre_horror:
-            case R.id.filter_on_genre_history:
-            case R.id.filter_on_genre_fantasy:
-            case R.id.filter_on_genre_family:
-            case R.id.filter_on_genre_drama:
-            case R.id.filter_on_genre_documentary:
-            case R.id.filter_on_genre_crime:
-            case R.id.filter_on_genre_comedy:
-            case R.id.filter_on_genre_animation:
-            case R.id.filter_on_genre_adventure:
-            case R.id.filter_on_genre_action:
-            case R.id.filter_on_genre_all:
-
-                return true;
-
-            default:
-                Log.d(LOG_TAG, "default switch option");
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @SuppressLint("NonConstantResourceId")
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        Log.d(LOG_TAG, "onOptionsItemSelected");
+//        // Handle item selection
+//        switch (item.getItemId()) {
+//            case R.id.filter_on_genre_western:
+//            case R.id.filter_on_genre_war:
+//            case R.id.filter_on_genre_thriller:
+//            case R.id.filter_on_genre_science_fiction:
+//            case R.id.filter_on_genre_romance:
+//            case R.id.filter_on_genre_mystery:
+//            case R.id.filter_on_genre_music:
+//            case R.id.filter_on_genre_horror:
+//            case R.id.filter_on_genre_history:
+//            case R.id.filter_on_genre_fantasy:
+//            case R.id.filter_on_genre_family:
+//            case R.id.filter_on_genre_drama:
+//            case R.id.filter_on_genre_documentary:
+//            case R.id.filter_on_genre_crime:
+//            case R.id.filter_on_genre_comedy:
+//            case R.id.filter_on_genre_animation:
+//            case R.id.filter_on_genre_adventure:
+//            case R.id.filter_on_genre_action:
+//            case R.id.filter_on_genre_all:
+//
+//                return true;
+//
+//            default:
+//                Log.d(LOG_TAG, "default switch option");
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {

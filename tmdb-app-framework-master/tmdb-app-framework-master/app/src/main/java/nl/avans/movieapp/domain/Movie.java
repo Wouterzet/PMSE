@@ -37,6 +37,7 @@ public class Movie implements Serializable {
             @NonNull String poster_path,
             @NonNull String backdrop_path,
             Boolean adult,
+
             String release_date,
             @NonNull String overview,
             Double vote_average,
@@ -89,4 +90,5 @@ public class Movie implements Serializable {
     public String getRelease_date() {
         return release_date;
     }
+
 }

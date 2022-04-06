@@ -31,6 +31,7 @@ public class MoviePageFragment extends Fragment
     private RecyclerView mRecyclerView;
     private MoviePageGridAdapter mMoviesGridAdapter;
 
+
     private static final int ONE_COLUMN = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
