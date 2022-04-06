@@ -15,5 +15,6 @@
     <string name="dialog_create_movielist_title">Maak nieuwe lijst</string>
     <string name="dialog_add_to_movielist_message">Kies lijst om film aan toe te voegen</string>
     <string name="dialog_add_to_movielist_title">Voeg film toe aan lijst</string>
+    <string name="cancel"> Annuleer</string>
     <string name="country">Land</string>
 </resources>

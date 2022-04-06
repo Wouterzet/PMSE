@@ -51,7 +51,7 @@ public class MovieListAdapter
         MovieList movieList = movieLists.get(position);
         Log.d(LOG_TAG, movieList.toString());
 
-        holder.movieListName.setText(movieList.getName());
+        holder.movieListName.setText(movieList.getName().trim());
     }
 
     @Override
