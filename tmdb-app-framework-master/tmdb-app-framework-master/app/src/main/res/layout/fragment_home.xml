@@ -1,118 +1,9 @@
-<!--    <item-->
-<!--        android:id="@+id/action_filter"-->
-<!--        android:icon="@drawable/ic_baseline_filter_alt_24"-->
-<!--        android:title="Filter"-->
-<!--        app:showAsAction="ifRoom">-->
-<!--        <menu>-->
-<!--            <item-->
-<!--                android:id="@+id/filter_on_genre_all"-->
-<!--                android:title="All"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/filter_on_genre"-->
-<!--                android:title="Genre"-->
-<!--                app:showAsAction="never">-->
-<!--                <menu>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_action"-->
-<!--                        android:title="Action"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_adventure"-->
-<!--                        android:title="Adventure"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_animation"-->
-<!--                        android:title="Animation"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_comedy"-->
-<!--                        android:title="Comedy"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_crime"-->
-<!--                        android:title="Crime"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_documentary"-->
-<!--                        android:title="Documentary"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_drama"-->
-<!--                        android:title="Drama"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_family"-->
-<!--                        android:title="Family"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_fantasy"-->
-<!--                        android:title="Fantasy"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_history"-->
-<!--                        android:title="History"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_horror"-->
-<!--                        android:title="Horror"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_music"-->
-<!--                        android:title="Music"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_mystery"-->
-<!--                        android:title="Mystery"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_romance"-->
-<!--                        android:title="Romance"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_science_fiction"-->
-<!--                        android:title="Science Fiction"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_thriller"-->
-<!--                        android:title="Thriller"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_tv_movie"-->
-<!--                        android:title="TV Movie"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_war"-->
-<!--                        android:title="War"/>-->
-<!--                    <item-->
-<!--                        android:id="@+id/filter_on_genre_western"-->
-<!--                        android:title="Western"/>-->
-<!--                </menu>-->
-<!--            </item>-->
-<!--        </menu>-->
-<!--    </item>-->
-<!--    <item-->
-<!--        android:id="@+id/action_sort"-->
-<!--        android:icon="@drawable/ic_baseline_sort_24"-->
-<!--        android:title="Sort"-->
-<!--        app:showAsAction="always">-->
-<!--        <menu>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_a_to_z"-->
-<!--                android:title="A -> Z"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_z_to_a"-->
-<!--                android:title="Z -> A"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_high_to_low"-->
-<!--                android:title="Rating High -> Low"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_low_to_high"-->
-<!--                android:title="Rating Low-> High"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_new_to_old"-->
-<!--                android:title="Release date New -> Old"-->
-<!--                app:showAsAction="never"/>-->
-<!--            <item-->
-<!--                android:id="@+id/sort_old_to_new"-->
-<!--                android:title="Release date Old -> New"-->
-<!--                app:showAsAction="never"/>-->
-<!--        </menu>-->
-<!--    </item>-->
-<!--    <item android:id="@+id/action_search"-->
-<!--        android:title="search"-->
-<!--        app:showAsAction="always|collapseActionView"-->
-<!--        app:actionViewClass="androidx.appcompat.widget.SearchView" />-->
-<!--</menu>-->
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/home_movies_swiperefresh"
     android:layout_width="match_parent"
@@ -125,3 +16,4 @@
         android:id="@+id/home_movies_grid"/>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>
