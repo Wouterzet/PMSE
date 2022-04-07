@@ -38,6 +38,11 @@ public class CreateMovieListController
         Call<CreateMovieListApiResponse> call = theMovieDbAPI.createMovieList(newMovieList);
         call.enqueue(this);
     }
+    public void addMovieToList(int listId, int movieId){
+
+        Call<CreateMovieListApiResponse> call = theMovieDbAPI.addMovieToList(listId,movieId);
+        call.enqueue(this);
+    }
 
     @Override
     public void onResponse(
