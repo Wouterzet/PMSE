@@ -131,15 +131,15 @@ private String trailer;
             for (Trailer x : trailers
             ) {
                 if (x.getType().equals("Trailer")  && x.getOfficial()) {
-                    trailer = "https://www.youtube.com/watch?v=" + x.getKey();
-                    mGenre.setText(String.valueOf(trailer));
+                    trailer ="https://www.youtube.com/watch?v=" + x.getKey();
+                    mGenre.setText("Trailer: "+ String.valueOf(trailer));
                     mGenre.setMovementMethod(LinkMovementMethod.getInstance());
                 }
             }
             if (trailer == null) {
 
                 trailer = "https://www.youtube.com/watch?v=" + trailers.get(0).getKey();
-                mGenre.setText(String.valueOf(trailer));
+                mGenre.setText("Trailer: "+ String.valueOf(trailer));
                 mGenre.setMovementMethod(LinkMovementMethod.getInstance());
             }
         }
