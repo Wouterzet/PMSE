@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.domain.Trailer;
 import nl.avans.movieapp.ui.gallery.CreateMovieListDialog;
 import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
@@ -45,7 +47,11 @@ private  TextView mReleaseYear;
 private RecyclerView mRecyclerView;
 private CommentGridAdapter mCommentGridAdapter;
 private CommentViewModel commentViewModel;
+private TrailerViewModel trailerViewModel;
 private ArrayList<Comment> mMovies = new ArrayList<>();
+private ArrayList<Trailer> mTrailers = new ArrayList<>();
+private String trailer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +63,24 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
+        trailerViewModel = new ViewModelProvider(this).get(TrailerViewModel.class);
         commentViewModel.setId(m.getId());
+        trailerViewModel.setId(m.getId());
         Log.d("MovieID", String.valueOf(m.getId()));
+        trailerViewModel.getTrailers().observe(this, new Observer<ArrayList<Trailer>>() {
+            @Override
+            public void onChanged(ArrayList<Trailer> trailers) {
+                mTrailers = trailers;
+                getTrailerLink(mTrailers);
+            }
+        });
         commentViewModel.getComments().observe(this, new Observer<ArrayList<Comment>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Comment> movies) {
                 Log.d("help", "onChanged");
                 mMovies = movies;
                 mCommentGridAdapter.setMovieList(mMovies);
+
             }
         });
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(
@@ -86,7 +102,7 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         mRating = (TextView) findViewById(R.id.tv_rating);
         mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
-        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
+
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
         mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
         Picasso.get()
@@ -107,5 +123,25 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
                 dialog.show(getSupportFragmentManager(), "CreateNewList");
             }
         });
+    }
+    private void getTrailerLink(ArrayList<Trailer> trailers){
+        if (trailers.size() == 0){
+            trailer = "N/A";
+        }else {
+            for (Trailer x : trailers
+            ) {
+                if (x.getType().equals("Trailer")  && x.getOfficial()) {
+                    trailer = "https://www.youtube.com/watch?v=" + x.getKey();
+                    mGenre.setText(String.valueOf(trailer));
+                    mGenre.setMovementMethod(LinkMovementMethod.getInstance());
+                }
+            }
+            if (trailer == null) {
+
+                trailer = "https://www.youtube.com/watch?v=" + trailers.get(0).getKey();
+                mGenre.setText(String.valueOf(trailer));
+                mGenre.setMovementMethod(LinkMovementMethod.getInstance());
+            }
+        }
     }
 }

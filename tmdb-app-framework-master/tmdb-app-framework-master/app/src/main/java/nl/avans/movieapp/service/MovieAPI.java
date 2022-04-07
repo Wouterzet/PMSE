@@ -38,4 +38,7 @@ public interface MovieAPI {
 
     @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> addMovieToList(@Body int movieId, @Path("list_id")int listId);
+
+    @GET("movie/{movie_id}/videos?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    Call<TrailerApiResponse> loadTrailer(@Path("movie_id")int movieId);
 }
