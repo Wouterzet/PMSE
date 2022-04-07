@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,7 +115,13 @@ private String trailer;
         mRecyclerView.setHasFixedSize(true);
 
 
+        Button button = findViewById(R.id.add_rating);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
