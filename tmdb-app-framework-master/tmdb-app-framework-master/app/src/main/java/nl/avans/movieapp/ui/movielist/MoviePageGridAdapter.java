@@ -24,11 +24,14 @@ public class MoviePageGridAdapter
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final ArrayList<Movie> moviesArrayList = new ArrayList<>();
-    private final OnMovieSelectionListener listener;
+    private  OnMovieSelectionListener listener;
 
     public MoviePageGridAdapter(OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
         this.listener = listener;
+    }
+    public MoviePageGridAdapter(){
+
     }
 
     @NonNull

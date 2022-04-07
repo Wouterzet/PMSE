@@ -1,15 +1,13 @@
 package nl.avans.movieapp.domain;
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 import nl.avans.movieapp.controller.MovieController;
 
-@Entity
-public class Movie implements Serializable {
+public class MovieSpec implements Serializable {
 
     // De attributen moeten overeen komen met de waarden zoals die in de JSON gebruikt worden.
     // Je kunt die attribuutname ook aanpassen, maar dat vraagt finetuning.
@@ -32,12 +30,11 @@ public class Movie implements Serializable {
 
     @NonNull
     private String overview;
-    public Movie(
+    public MovieSpec(
             @NonNull int id,
             @NonNull String poster_path,
             @NonNull String backdrop_path,
             Boolean adult,
-
             String release_date,
             @NonNull String overview,
             Double vote_average,
@@ -90,5 +87,4 @@ public class Movie implements Serializable {
     public String getRelease_date() {
         return release_date;
     }
-
 }

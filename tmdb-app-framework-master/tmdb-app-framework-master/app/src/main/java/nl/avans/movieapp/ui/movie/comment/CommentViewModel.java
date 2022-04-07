@@ -32,6 +32,7 @@ public class CommentViewModel extends AndroidViewModel
     private Application application;
     private int id;
 
+
     public CommentViewModel(Application application) {
         super(application);
         this.application = application;
@@ -43,25 +44,33 @@ public class CommentViewModel extends AndroidViewModel
         this.id = id;
     }
 
+
     public LiveData<Integer> getPageNr() {
         return mPageNr;
     }
 
-    public LiveData<ArrayList<Comment>> getMovies() {
+    public LiveData<ArrayList<Comment>> getComments() {
         Log.d(LOG_TAG, "getMovies");
         if(mComments == null) {
             mComments = new MutableLiveData<>();
-            loadMovies(this);
+            loadComments(this);
         }
         return mComments;
     }
 // Deze moet ik nameken denl
 
-    private void loadMovies(CommentController.CommentControllerListener listener){
+    private void loadComments(CommentController.CommentControllerListener listener){
         // Do an asynchronous operation to fetch movies
         Log.d(LOG_TAG, "loadMovies");
         CommentController commentController = new CommentController(listener);
         commentController.loadMovieCommentsById(id,this.mPageNr.getValue());
+        Log.d("MovieID", String.valueOf(id));
+    }
+
+    private void loadMovieById(MovieController.MovieControllerListener listener){
+        Log.d(LOG_TAG, "loadMovieById");
+        MovieController movieController = new MovieController(listener);
+        movieController.loadMovieById(id);
         Log.d("MovieID", String.valueOf(id));
     }
 

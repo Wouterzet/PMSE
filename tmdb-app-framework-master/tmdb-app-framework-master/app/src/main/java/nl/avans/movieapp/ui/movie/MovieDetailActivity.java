@@ -56,7 +56,7 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
         commentViewModel.setId(m.getId());
         Log.d("MovieID", String.valueOf(m.getId()));
-        commentViewModel.getMovies().observe(this, new Observer<ArrayList<Comment>>() {
+        commentViewModel.getComments().observe(this, new Observer<ArrayList<Comment>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Comment> movies) {
                 Log.d("help", "onChanged");
@@ -70,6 +70,8 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         mRecyclerView.setLayoutManager(layoutManager);
         mCommentGridAdapter = new CommentGridAdapter();
         mRecyclerView.setAdapter(mCommentGridAdapter);
+
+
 
 
 
