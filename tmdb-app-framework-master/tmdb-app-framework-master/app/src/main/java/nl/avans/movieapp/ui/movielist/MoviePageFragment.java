@@ -37,6 +37,7 @@ public class MoviePageFragment extends Fragment
     private RecyclerView mRecyclerView;
     private MoviePageGridAdapter mMoviesGridAdapter;
     private SearchFilter searchFilter;
+    private ArrayList<Movie> mFullList;
 
 
     private static final int ONE_COLUMN = 1;
@@ -60,6 +61,7 @@ public class MoviePageFragment extends Fragment
             public void onChanged(@Nullable ArrayList<Movie> movies) {
                 Log.d(LOG_TAG, "onChanged");
                 mMovies = movies;
+                mFullList= movies;
                 mMoviesGridAdapter.setMovieList(mMovies);
             }
         });
@@ -90,18 +92,28 @@ public class MoviePageFragment extends Fragment
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchFilter = new SearchFilter(mMovies, query);
-                mMovies = searchFilter.filterList();
-                mMoviesGridAdapter.setMovieList(mMovies);
-
+                if(query.length() != 0) {
+                    searchFilter = new SearchFilter(mMovies, query);
+                    mMovies = searchFilter.filterList();
+                    mMoviesGridAdapter.setMovieList(mMovies);
+                    return true;
+                }else {
+                    mMoviesGridAdapter.setMovieList(mFullList);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchFilter = new SearchFilter(mMovies, newText);
-                mMovies = searchFilter.filterList();
-                mMoviesGridAdapter.setMovieList(mMovies);
+                if(newText.length() != 0){
+                    searchFilter = new SearchFilter(mMovies, newText);
+                    mMovies = searchFilter.filterList();
+                    mMoviesGridAdapter.setMovieList(mMovies);
+                    return true;
+                }else {
+                    mMoviesGridAdapter.setMovieList(mFullList);
+                }
+
                 return false;
             }
         });
