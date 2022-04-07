@@ -4,17 +4,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
-import nl.avans.movieapp.controller.MovieListsController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
@@ -29,12 +31,24 @@ public class MovieListDetailAdapter
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final MovieList movieLists;
-    private final ArrayList<Movie> movieArrayList = new ArrayList<>();
+    private final OnMovieSelectionListener listener;
+    private ArrayList<Movie> movieArrayList = new ArrayList<>();
 
-    public MovieListDetailAdapter(MovieList movieLists) {
+    public MovieListDetailAdapter(MovieList movieLists, OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
         this.movieLists = movieLists;
-        ArrayList movieArrayList = movieLists.getItems();
+        Movie jamesbond = new Movie(
+                1,
+                "https://static.wikia.nocookie.net/jamesbond/images/9/95/SPECTRE_poster_1.jpg/revision/latest?cb=20150916083032",
+                "https://images.pathe-thuis.nl/20863_1920x1080.jpg",
+                false, "20-12-2021",
+                "Kleine samenvatting",
+                7.3,
+                "James Bond: Spectre"
+        );
+
+        this.movieArrayList.add(jamesbond);
+        this.listener = listener;
     }
 
     @NonNull
@@ -54,8 +68,14 @@ public class MovieListDetailAdapter
         Movie movie = movieArrayList.get(position);
         Log.d(LOG_TAG, movie.toString());
 
-        holder.movieListName.setText(movie.getTitle());
-        Log.d(LOG_TAG, movie.toString());
+        Picasso.get()
+                .load(movie.getPoster_path())
+                .resize(700, 700)
+                .centerInside()
+                .into(holder.moviePoster);
+        holder.movieName.setText(movie.getTitle());
+        holder.movieOverview.setText(movie.getOverview());
+
 
     }
 
@@ -78,18 +98,26 @@ public class MovieListDetailAdapter
      */
     public class MovieListsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView movieListName;
+        public TextView movieName;
+        public TextView movieOverview;
+        public ImageView moviePoster;
 
         public MovieListsViewHolder(@NonNull View itemView) {
             super(itemView);
-            movieListName = (TextView) itemView.findViewById(R.id.tv_movielist_griditem_textview);
+            movieName = (TextView) itemView.findViewById(R.id.movielist_griditem_title);
+            movieOverview = (TextView) itemView.findViewById(R.id.movielist_griditem_overview);
+            moviePoster = (ImageView) itemView.findViewById(R.id.movielist_griditem_poster);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-
+            Log.d(LOG_TAG, "onClick on item " + getAdapterPosition());
+            listener.onMovieSelected(getAdapterPosition());
 
         }
+    }
+    public interface OnMovieSelectionListener {
+        void onMovieSelected(int position);
     }
 }

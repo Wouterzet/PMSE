@@ -1,6 +1,7 @@
 package nl.avans.movieapp.ui.movie;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.ui.gallery.CreateMovieListDialog;
+import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
 import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
 
@@ -104,8 +107,8 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddMovieToListDialog dialog = new AddMovieToListDialog();
+                dialog.show(getSupportFragmentManager(), "CreateNewList");
             }
         });
     }
