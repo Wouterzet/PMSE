@@ -55,21 +55,10 @@
                 android:id="@+id/tv_genre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Genre" />
+                android:text="Trailer" />
 
-            <TextView
-                android:id="@+id/tv_runtime"
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:layout_gravity="right"
-                android:text="Runtime" />
 
-            <TextView
-                android:layout_gravity="right"
-                android:id="@+id/tv_country"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/country" />
+
 
             <TextView
                 android:layout_gravity="right"
@@ -77,6 +66,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Releaseyear" />
+
+            <Button
+                android:id="@+id/add_rating"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="right"
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
+                android:text="Rate movie"
+                ></Button>
         </LinearLayout>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView

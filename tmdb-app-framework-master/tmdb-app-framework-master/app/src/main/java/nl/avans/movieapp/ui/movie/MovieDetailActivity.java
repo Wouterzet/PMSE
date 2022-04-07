@@ -87,10 +87,6 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
         mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
-        mRuntime = (TextView) findViewById(R.id.tv_runtime);
-        mRuntime.setText(String.valueOf("Runtime: "+m.getVote_average()));
-        mCountry = (TextView) findViewById(R.id.tv_country);
-        mCountry.setText(String.valueOf("Country: "+m.getVote_average()));
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
         mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
         Picasso.get()

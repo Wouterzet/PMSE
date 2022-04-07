@@ -27,7 +27,7 @@ public class SearchFilter extends FuzzySearch {
     public ArrayList<Movie> filterList(){
         makeNameList();
         List<ExtractedResult> filteredNames = new ArrayList<>();
-        filteredNames = FuzzySearch.extractSorted(search, nameList,filedList.size());
+        filteredNames = FuzzySearch.extractTop(search, nameList,filedList.size());
         Log.d("Search filter",filteredNames.toString());
         stringsToMovies(filteredNames);
         return filterdList;
