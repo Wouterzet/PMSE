@@ -40,14 +40,9 @@ import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
 import nl.avans.movieapp.ui.tv.TvViewModel;
 
 public class MovieListDetailActivity extends AppCompatActivity implements Serializable, MovieListDetailAdapter.OnMovieSelectionListener {
-    private TextView mTitle;
-    private ImageView mBanner;
-    private TextView mOverview;
-    private TextView mRating;
     private MovieList m;
     private RecyclerView mRecyclerView;
     private MovieListDetailAdapter movieListAdapter;
-    private final MovieList movieLists = new MovieList("name", "String description", 2, new ArrayList<>() ,2, "Henk");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

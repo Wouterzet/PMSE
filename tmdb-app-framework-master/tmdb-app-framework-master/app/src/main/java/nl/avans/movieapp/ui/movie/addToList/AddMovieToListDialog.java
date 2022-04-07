@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,8 +32,11 @@ import nl.avans.movieapp.controller.CreateMovieListController;
 import nl.avans.movieapp.controller.MovieListsController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.service.MovieAPI;
 import nl.avans.movieapp.ui.gallery.CreateMovieListDialog;
 import nl.avans.movieapp.ui.movielist.MoviePageViewModel;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddMovieToListDialog extends DialogFragment implements AddMovieToListAdapter.OnMovieListSelectionListener {
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -38,8 +44,10 @@ public class AddMovieToListDialog extends DialogFragment implements AddMovieToLi
     private ArrayList<MovieList> movieLists = new ArrayList<>();
     private AddMovieToListAdapter addMovieToListAdapter;
     private RecyclerView recyclerView;
+    private Movie mMovie;
 
-    public AddMovieToListDialog() {
+    public AddMovieToListDialog(Movie movie) {
+        this.mMovie = movie;
     }
 
     // Use this instance of the interface to deliver action events
@@ -87,7 +95,16 @@ public class AddMovieToListDialog extends DialogFragment implements AddMovieToLi
 
     @Override
     public void onMovieListSelected(int position) {
-        Log.d(LOG_TAG, movieLists.get(position).getName());
+        Log.d(LOG_TAG, mMovie.getId() + "I" + movieLists.get(position).getId());
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        MovieAPI api = retrofit.create(MovieAPI.class);
+        api.addMovieToList(mMovie.getId(), movieLists.get(position).getId());
     }
 
 }

@@ -41,7 +41,7 @@ public class AddMovieToListAdapter extends RecyclerView.Adapter<AddMovieToListAd
         final boolean shouldAttachToParentImmediately = false;
 
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        return new AddMovieToListAdapter.AddMovieToListViewHolder(view);
+        return new AddMovieToListViewHolder(view);
     }
 
     @Override

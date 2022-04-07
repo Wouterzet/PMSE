@@ -50,15 +50,15 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Movie m = (Movie) getIntent().getSerializableExtra("Movie");
+        Movie mMovie = (Movie) getIntent().getSerializableExtra("Movie");
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         String title = "Kinepolis";
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
-        commentViewModel.setId(m.getId());
-        Log.d("MovieID", String.valueOf(m.getId()));
+        commentViewModel.setId(mMovie.getId());
+        Log.d("MovieID", String.valueOf(mMovie.getId()));
         commentViewModel.getComments().observe(this, new Observer<ArrayList<Comment>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Comment> movies) {
@@ -80,25 +80,25 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
 
         mBanner = (ImageView) findViewById(R.id.iv_banner);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText(m.getTitle());
+        mTitle.setText(mMovie.getTitle());
         mOverview = (TextView) findViewById(R.id.tv_overview);
-        mOverview.setText(m.getOverview());
+        mOverview.setText(mMovie.getOverview());
         mRating = (TextView) findViewById(R.id.tv_rating);
-        mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
+        mRating.setText(String.valueOf("Rating: "+mMovie.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
-        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
+        mGenre.setText(String.valueOf("Genre: "+mMovie.getVote_average()));
         mRuntime = (TextView) findViewById(R.id.tv_runtime);
-        mRuntime.setText(String.valueOf("Runtime: "+m.getVote_average()));
+        mRuntime.setText(String.valueOf("Runtime: "+mMovie.getVote_average()));
         mCountry = (TextView) findViewById(R.id.tv_country);
-        mCountry.setText(String.valueOf("Country: "+m.getVote_average()));
+        mCountry.setText(String.valueOf("Country: "+mMovie.getVote_average()));
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
-        mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
+        mReleaseYear.setText(String.valueOf("Release year: "+mMovie.getRelease_date().substring(0, 4)));
         Picasso.get()
-                .load(m.getBackdrop_path())
+                .load(mMovie.getBackdrop_path())
                 .resize(1200, 750)
                 .centerInside()
                 .into(mBanner);
-        Log.d("Test", m.toString());
+        Log.d("Test", mMovie.toString());
         mRecyclerView.setHasFixedSize(true);
 
 
@@ -107,7 +107,7 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMovieToListDialog dialog = new AddMovieToListDialog();
+                AddMovieToListDialog dialog = new AddMovieToListDialog(mMovie);
                 dialog.show(getSupportFragmentManager(), "CreateNewList");
             }
         });
