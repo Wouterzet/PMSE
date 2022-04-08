@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.domain.SpecList;
 import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
 
 /**
@@ -75,8 +77,8 @@ public class MovieListDetailAdapter
     }
 
     @Override
-    public void onMovieListsAvailable(MovieList movieLists) {
-        Log.d(LOG_TAG, "We have " + movieLists.getItems() + " items");
+    public void onMovieListsAvailable(SpecList movieLists) {
+        Log.d(LOG_TAG, "We have " + movieLists + " items");
         this.movieArrayList.clear();
         this.movieArrayList.addAll(movieLists.getItems());
         notifyDataSetChanged();
