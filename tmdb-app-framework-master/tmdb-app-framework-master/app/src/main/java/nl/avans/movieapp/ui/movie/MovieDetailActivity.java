@@ -66,9 +66,9 @@ private String trailer;
         toolbar.setTitle(title);
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
         trailerViewModel = new ViewModelProvider(this).get(TrailerViewModel.class);
-        commentViewModel.setId(m.getId());
-        trailerViewModel.setId(m.getId());
-        Log.d("MovieID", String.valueOf(m.getId()));
+        commentViewModel.setId(mMovie.getId());
+        trailerViewModel.setId(mMovie.getId());
+        Log.d("MovieID", String.valueOf(mMovie.getId()));
         trailerViewModel.getTrailers().observe(this, new Observer<ArrayList<Trailer>>() {
             @Override
             public void onChanged(ArrayList<Trailer> trailers) {
@@ -104,11 +104,7 @@ private String trailer;
         mRating = (TextView) findViewById(R.id.tv_rating);
         mRating.setText(String.valueOf("Rating: "+mMovie.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
-        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
-        mRuntime = (TextView) findViewById(R.id.tv_runtime);
-        mRuntime.setText(String.valueOf("Runtime: "+m.getVote_average()));
-        mCountry = (TextView) findViewById(R.id.tv_country);
-        mCountry.setText(String.valueOf("Country: "+m.getVote_average()));
+        mGenre.setText(String.valueOf("Genre: "+mMovie.getVote_average()));
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
         mReleaseYear.setText(String.valueOf("Release year: "+mMovie.getRelease_date().substring(0, 4)));
         Picasso.get()

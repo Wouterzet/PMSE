@@ -27,6 +27,8 @@ public class AddRatingDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        View root = inflater.inflate(R.layout.dialog_add_rating, container);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(inflater.inflate(R.layout.dialog_add_rating, container))
                 .setMessage(R.string.dialog_add_to_movielist_message)
@@ -42,6 +44,9 @@ public class AddRatingDialog extends DialogFragment {
                         AddRatingDialog.this.getDialog().cancel();
                     }
                 });
+
+        this.button = root.findViewById(R.id.rating_button);
+        this.slider = root.findViewById(R.id.rating_slider);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
