@@ -58,7 +58,7 @@ private String trailer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Movie m = (Movie) getIntent().getSerializableExtra("Movie");
+        Movie mMovie = (Movie) getIntent().getSerializableExtra("Movie");
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         String title = "Kinepolis";
@@ -98,21 +98,25 @@ private String trailer;
 
         mBanner = (ImageView) findViewById(R.id.iv_banner);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText(m.getTitle());
+        mTitle.setText(mMovie.getTitle());
         mOverview = (TextView) findViewById(R.id.tv_overview);
-        mOverview.setText(m.getOverview());
+        mOverview.setText(mMovie.getOverview());
         mRating = (TextView) findViewById(R.id.tv_rating);
-        mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
+        mRating.setText(String.valueOf("Rating: "+mMovie.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
-
+        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
+        mRuntime = (TextView) findViewById(R.id.tv_runtime);
+        mRuntime.setText(String.valueOf("Runtime: "+m.getVote_average()));
+        mCountry = (TextView) findViewById(R.id.tv_country);
+        mCountry.setText(String.valueOf("Country: "+m.getVote_average()));
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
-        mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
+        mReleaseYear.setText(String.valueOf("Release year: "+mMovie.getRelease_date().substring(0, 4)));
         Picasso.get()
-                .load(m.getBackdrop_path())
+                .load(mMovie.getBackdrop_path())
                 .resize(1200, 750)
                 .centerInside()
                 .into(mBanner);
-        Log.d("Test", m.toString());
+        Log.d("Test", mMovie.toString());
         mRecyclerView.setHasFixedSize(true);
 
 
@@ -128,7 +132,7 @@ private String trailer;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMovieToListDialog dialog = new AddMovieToListDialog();
+                AddMovieToListDialog dialog = new AddMovieToListDialog(mMovie);
                 dialog.show(getSupportFragmentManager(), "CreateNewList");
             }
         });

@@ -52,7 +52,7 @@ public class MovieListSpecController implements Callback<MovieListSpecApiRespons
         this.id=id;
     }
 
-    public void loadMovieListsForUser() {
+    public void loadMovieListByID() {
         Call<MovieListSpecApiResponse> call = movieAPI.loadMovieListByID(id);
         call.enqueue(this);
     }

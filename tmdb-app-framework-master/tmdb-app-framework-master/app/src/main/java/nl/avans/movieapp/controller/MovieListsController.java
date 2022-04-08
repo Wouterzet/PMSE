@@ -11,6 +11,7 @@ import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.service.CreateMovieListApiResponse;
 import nl.avans.movieapp.service.MovieAPI;
 import nl.avans.movieapp.service.MovieApiResponse;
 import nl.avans.movieapp.service.MovieListsApiResponse;
@@ -53,6 +54,7 @@ public class MovieListsController implements Callback<MovieListsApiResponse> {
         Call<MovieListsApiResponse> call = movieAPI.loadMovieListsForUser();
         call.enqueue(this);
     }
+
 
     @Override
     public void onResponse(Call<MovieListsApiResponse> call, Response<MovieListsApiResponse> response) {
