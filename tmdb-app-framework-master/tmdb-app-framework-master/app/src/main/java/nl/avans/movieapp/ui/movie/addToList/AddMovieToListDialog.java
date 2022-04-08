@@ -46,9 +46,11 @@ public class AddMovieToListDialog extends DialogFragment implements AddMovieToLi
     private AddMovieToListAdapter addMovieToListAdapter;
     private RecyclerView recyclerView;
     private Movie mMovie;
+    private MovieListsController.MovieListsControllerListener listener;
 
     public AddMovieToListDialog(Movie movie) {
         this.mMovie = movie;
+        this.listener = listener;
     }
 
     // Use this instance of the interface to deliver action events
@@ -97,8 +99,9 @@ public class AddMovieToListDialog extends DialogFragment implements AddMovieToLi
     @Override
     public void onMovieListSelected(int position) {
         Log.d(LOG_TAG, mMovie.getId() + " " + movieLists.get(position).getId());
-        MovieListSpecController specController = new MovieListSpecController(this);
-        api.addMovieToList(mMovie.getId(), movieLists.get(position).getId());
+        CreateMovieListController specController = new CreateMovieListController((MovieListsController.MovieListsControllerListener) this);
+        specController.addMovieToList(mMovie.getId(), movieLists.get(position).getId());
+        Log.d("AddMovieToList", "Het werkt");
     }
 
 }
