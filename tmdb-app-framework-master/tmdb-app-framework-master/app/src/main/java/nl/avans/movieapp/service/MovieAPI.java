@@ -5,6 +5,8 @@ import android.util.Log;
 import nl.avans.movieapp.domain.MovieList;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -38,4 +40,11 @@ public interface MovieAPI {
 
     @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> addMovieToList(@Body int movieId, @Path("list_id")int listId);
+
+    @GET("movie/{movie_id}/videos?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    Call<TrailerApiResponse> loadTrailer(@Path("movie_id")int movieId);
+
+    @FormUrlEncoded
+    @POST("movie/{movie_id}/rating?api_key=" + API_KEY + "&session_id=" + SESSION_ID)
+    Call<MovieApiResponse> addRating(@Path("movie_id")int movieId, @Field("value") double value);
 }

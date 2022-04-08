@@ -41,5 +41,6 @@
     <string name="dialog_create_movielist_message">Name of your new list?</string>
     <string name="dialog_add_to_movielist_title">Add movie to list</string>
     <string name="dialog_add_to_movielist_message">Choose list to add movie to</string>
+    <string name="send">Send</string>
     <string name="cancel">Cancel</string>
 </resources>

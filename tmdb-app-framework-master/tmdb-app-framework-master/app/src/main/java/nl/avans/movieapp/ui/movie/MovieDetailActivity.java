@@ -17,8 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +30,9 @@ import java.util.ArrayList;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.domain.Trailer;
 import nl.avans.movieapp.ui.gallery.CreateMovieListDialog;
+import nl.avans.movieapp.ui.movie.addRating.AddRatingDialog;
 import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
 import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
@@ -45,26 +49,40 @@ private  TextView mReleaseYear;
 private RecyclerView mRecyclerView;
 private CommentGridAdapter mCommentGridAdapter;
 private CommentViewModel commentViewModel;
+private TrailerViewModel trailerViewModel;
 private ArrayList<Comment> mMovies = new ArrayList<>();
+private ArrayList<Trailer> mTrailers = new ArrayList<>();
+private String trailer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Movie m = (Movie) getIntent().getSerializableExtra("Movie");
+        Movie mMovie = (Movie) getIntent().getSerializableExtra("Movie");
         setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         String title = "Kinepolis";
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
-        commentViewModel.setId(m.getId());
-        Log.d("MovieID", String.valueOf(m.getId()));
+        trailerViewModel = new ViewModelProvider(this).get(TrailerViewModel.class);
+        commentViewModel.setId(mMovie.getId());
+        trailerViewModel.setId(mMovie.getId());
+        Log.d("MovieID", String.valueOf(mMovie.getId()));
+        trailerViewModel.getTrailers().observe(this, new Observer<ArrayList<Trailer>>() {
+            @Override
+            public void onChanged(ArrayList<Trailer> trailers) {
+                mTrailers = trailers;
+                getTrailerLink(mTrailers);
+            }
+        });
         commentViewModel.getComments().observe(this, new Observer<ArrayList<Comment>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Comment> movies) {
                 Log.d("help", "onChanged");
                 mMovies = movies;
                 mCommentGridAdapter.setMovieList(mMovies);
+
             }
         });
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(
@@ -80,32 +98,59 @@ private ArrayList<Comment> mMovies = new ArrayList<>();
 
         mBanner = (ImageView) findViewById(R.id.iv_banner);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText(m.getTitle());
+        mTitle.setText(mMovie.getTitle());
         mOverview = (TextView) findViewById(R.id.tv_overview);
-        mOverview.setText(m.getOverview());
+        mOverview.setText(mMovie.getOverview());
         mRating = (TextView) findViewById(R.id.tv_rating);
-        mRating.setText(String.valueOf("Rating: "+m.getVote_average()));
+        mRating.setText(String.valueOf("Rating: "+mMovie.getVote_average()));
         mGenre = (TextView) findViewById(R.id.tv_genre);
-        mGenre.setText(String.valueOf("Genre: "+m.getVote_average()));
+        mGenre.setText(String.valueOf("Genre: "+mMovie.getVote_average()));
         mReleaseYear = (TextView) findViewById(R.id.tv_releaseYear);
-        mReleaseYear.setText(String.valueOf("Release year: "+m.getRelease_date().substring(0, 4)));
+        mReleaseYear.setText(String.valueOf("Release year: "+mMovie.getRelease_date().substring(0, 4)));
         Picasso.get()
-                .load(m.getBackdrop_path())
+                .load(mMovie.getBackdrop_path())
                 .resize(1200, 750)
                 .centerInside()
                 .into(mBanner);
-        Log.d("Test", m.toString());
+        Log.d("Test", mMovie.toString());
         mRecyclerView.setHasFixedSize(true);
 
 
-
+        Button button = findViewById(R.id.add_rating);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddRatingDialog dialog = new AddRatingDialog(mMovie.getId());
+                dialog.show(getSupportFragmentManager(), "AddRating");
+            }
+        });
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMovieToListDialog dialog = new AddMovieToListDialog();
+                AddMovieToListDialog dialog = new AddMovieToListDialog(mMovie);
                 dialog.show(getSupportFragmentManager(), "CreateNewList");
             }
         });
+    }
+    private void getTrailerLink(ArrayList<Trailer> trailers){
+        if (trailers.size() == 0){
+            trailer = "N/A";
+        }else {
+            for (Trailer x : trailers
+            ) {
+                if (x.getType().equals("Trailer")  && x.getOfficial()) {
+                    trailer ="https://www.youtube.com/watch?v=" + x.getKey();
+                    mGenre.setText("Trailer: "+ String.valueOf(trailer));
+                    mGenre.setMovementMethod(LinkMovementMethod.getInstance());
+                }
+            }
+            if (trailer == null) {
+
+                trailer = "https://www.youtube.com/watch?v=" + trailers.get(0).getKey();
+                mGenre.setText("Trailer: "+ String.valueOf(trailer));
+                mGenre.setMovementMethod(LinkMovementMethod.getInstance());
+            }
+        }
     }
 }

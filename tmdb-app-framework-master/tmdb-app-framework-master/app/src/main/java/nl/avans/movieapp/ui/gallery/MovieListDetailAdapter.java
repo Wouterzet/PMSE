@@ -30,24 +30,12 @@ public class MovieListDetailAdapter
 {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
-    private final MovieList movieLists;
     private final OnMovieSelectionListener listener;
-    private ArrayList<Movie> movieArrayList = new ArrayList<>();
+    private ArrayList<Movie> movieArrayList = null;
 
     public MovieListDetailAdapter(MovieList movieLists, OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
-        this.movieLists = movieLists;
-        Movie jamesbond = new Movie(
-                1,
-                "https://static.wikia.nocookie.net/jamesbond/images/9/95/SPECTRE_poster_1.jpg/revision/latest?cb=20150916083032",
-                "https://images.pathe-thuis.nl/20863_1920x1080.jpg",
-                false, "20-12-2021",
-                "Kleine samenvatting",
-                7.3,
-                "James Bond: Spectre"
-        );
-
-        this.movieArrayList.add(jamesbond);
+        this.movieArrayList = movieLists.getItems();
         this.listener = listener;
     }
 
@@ -58,7 +46,6 @@ public class MovieListDetailAdapter
 
         int layoutIdForListItem = R.layout.movie_list_item;
         final boolean shouldAttachToParentImmediately = false;
-        ArrayList movieArrayList = movieLists.getItems();
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new MovieListsViewHolder(view);
     }
@@ -81,7 +68,10 @@ public class MovieListDetailAdapter
 
     @Override
     public int getItemCount() {
-        return movieArrayList.size();
+        if (movieArrayList != null) {
+            return movieArrayList.size();
+        }
+        return 0;
     }
 
     @Override
