@@ -11,6 +11,7 @@ import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.domain.SpecList;
 import nl.avans.movieapp.service.MovieAPI;
 import nl.avans.movieapp.service.MovieApiResponse;
 import nl.avans.movieapp.service.MovieListSpecApiResponse;
@@ -22,38 +23,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MovieListSpecController implements Callback<MovieListSpecApiResponse> {
+public class MovieListSpecController extends BaseMovieAppController implements Callback<MovieListSpecApiResponse> {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
 
     private MovieListsSpecControllerListener listener;
 
-    private final Retrofit retrofit;
-    private final Gson gson;
+
     private final MovieAPI movieAPI;
     private int id;
 
     public MovieListSpecController(MovieListsSpecControllerListener listener) {
+        super();
         this.listener = listener;
-
-        gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
         movieAPI = retrofit.create(MovieAPI.class);
     }
-    public void setId(int id){
-        this.id=id;
-    }
 
-    public void loadMovieListByID() {
-        Call<MovieListSpecApiResponse> call = movieAPI.loadMovieListByID(id);
+    public void loadMovieListByID(int id) {
+        Call<MovieListSpecApiResponse> call = movieAPI.loadMovieListByID(7100269);
         call.enqueue(this);
     }
 
@@ -62,12 +50,17 @@ public class MovieListSpecController implements Callback<MovieListSpecApiRespons
         Log.d(LOG_TAG, "onResponse() - statuscode: " + response.code());
 
         if(response.isSuccessful()) {
+            Log.d(LOG_TAG, "response: Test " + response.message());
+            Log.d(LOG_TAG, "response: Test " + response.raw());
             Log.d(LOG_TAG, "response: " + response.body());
+            Log.d(LOG_TAG, "response: Test " + response.body().getResults());
 
-            // Deserialization
-            MovieList movieLists = response.body().getResults();
-            Log.d("Laatse kans", movieLists.toString());
-            listener.onMovieListsAvailable(movieLists);
+            if(response.body().getResults() != null) {
+                // Deserialization
+                SpecList movieLists = response.body().getResults();
+                Log.d("Laatse kans", movieLists.toString());
+                listener.onMovieListsAvailable(movieLists);
+            }
         } else {
             Log.e(LOG_TAG, "Not successful! Message: " + response.message());
         }
@@ -82,7 +75,6 @@ public class MovieListSpecController implements Callback<MovieListSpecApiRespons
      *
      */
     public interface MovieListsSpecControllerListener {
-        void onMovieListsAvailable(MovieList movieLists);
-//        void onMovieListCreated(MovieList newMovieList);
+        void onMovieListsAvailable(SpecList movieLists);
     }
 }

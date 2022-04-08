@@ -4,15 +4,16 @@ import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
+import nl.avans.movieapp.domain.SpecList;
 
 public class MovieListSpecApiResponse {
-    private MovieList results;
+    private SpecList results;
 
-    public MovieListSpecApiResponse(MovieList results) {
+    public MovieListSpecApiResponse(SpecList results) {
         this.results = results;
     }
 
-    public MovieList getResults() {
+    public SpecList getResults() {
         return results;
     }
 

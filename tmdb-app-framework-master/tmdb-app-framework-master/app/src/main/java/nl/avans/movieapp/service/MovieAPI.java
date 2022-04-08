@@ -2,6 +2,7 @@ package nl.avans.movieapp.service;
 
 import android.util.Log;
 
+import kotlin.ParameterName;
 import nl.avans.movieapp.domain.MovieList;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,14 +33,12 @@ public interface MovieAPI {
     @GET("account/{account_id}/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListsApiResponse> loadMovieListsForUser();
 
-    @GET("lists/{list_id}?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    @GET("list/{list_id}?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListSpecApiResponse> loadMovieListByID(@Path("list_id") int id);
 
     @POST("list?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> createMovieList(@Body MovieList movieList);
 
-    @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
-    Call<CreateMovieListApiResponse> addMovieToList(@Body int movieId, @Path("list_id")int listId);
 
     @GET("movie/{movie_id}/videos?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<TrailerApiResponse> loadTrailer(@Path("movie_id")int movieId);
@@ -47,4 +46,8 @@ public interface MovieAPI {
     @FormUrlEncoded
     @POST("movie/{movie_id}/rating?api_key=" + API_KEY + "&session_id=" + SESSION_ID)
     Call<MovieApiResponse> addRating(@Path("movie_id")int movieId, @Field("value") double value);
+
+    @FormUrlEncoded
+    @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    Call<CreateMovieListApiResponse> addMovieToList(@Path("list_id")int listId,@Field("media_id")  String media_id);
 }

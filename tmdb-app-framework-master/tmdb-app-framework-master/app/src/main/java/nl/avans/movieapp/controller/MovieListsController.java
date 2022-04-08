@@ -82,5 +82,6 @@ public class MovieListsController implements Callback<MovieListsApiResponse> {
     public interface MovieListsControllerListener {
         void onMovieListsAvailable(List<MovieList> movieLists);
         void onMovieListCreated(MovieList newMovieList);
+
     }
 }
