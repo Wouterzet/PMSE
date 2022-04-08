@@ -3,41 +3,18 @@ package nl.avans.movieapp.ui.gallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import nl.avans.movieapp.R;
-import nl.avans.movieapp.controller.CommentController;
-import nl.avans.movieapp.controller.MovieListsController;
-import nl.avans.movieapp.controller.MoviePageController;
-import nl.avans.movieapp.controller.TvSpecController;
-import nl.avans.movieapp.domain.Comment;
-import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.domain.Tv;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
-import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
-import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
-import nl.avans.movieapp.ui.tv.TvViewModel;
 
 public class MovieListDetailActivity extends AppCompatActivity implements Serializable, MovieListDetailAdapter.OnMovieSelectionListener {
     private MovieList m;

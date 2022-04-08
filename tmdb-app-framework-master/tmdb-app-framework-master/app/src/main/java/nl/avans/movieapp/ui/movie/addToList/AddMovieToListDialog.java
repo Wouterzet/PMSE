@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.CreateMovieListController;
+import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.controller.MovieListsController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
@@ -95,15 +96,8 @@ public class AddMovieToListDialog extends DialogFragment implements AddMovieToLi
 
     @Override
     public void onMovieListSelected(int position) {
-        Log.d(LOG_TAG, mMovie.getId() + "I" + movieLists.get(position).getId());
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        MovieAPI api = retrofit.create(MovieAPI.class);
+        Log.d(LOG_TAG, mMovie.getId() + " " + movieLists.get(position).getId());
+        MovieListSpecController specController = new MovieListSpecController(this);
         api.addMovieToList(mMovie.getId(), movieLists.get(position).getId());
     }
 
