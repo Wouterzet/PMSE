@@ -32,6 +32,7 @@ import nl.avans.movieapp.domain.Comment;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Trailer;
 import nl.avans.movieapp.ui.gallery.CreateMovieListDialog;
+import nl.avans.movieapp.ui.movie.addRating.AddRatingDialog;
 import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 import nl.avans.movieapp.ui.movie.comment.CommentGridAdapter;
 import nl.avans.movieapp.ui.movie.comment.CommentViewModel;
@@ -119,7 +120,8 @@ private String trailer;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AddRatingDialog dialog = new AddRatingDialog();
+                dialog.show(getSupportFragmentManager(), "AddRating");
             }
         });
         FloatingActionButton fab = findViewById(R.id.fab);
