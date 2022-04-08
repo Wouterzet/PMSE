@@ -31,12 +31,22 @@ public class MovieController
         movieAPI = retrofit.create(MovieAPI.class);
     }
 
+    public  MovieController() {
+        super();
+        movieAPI = retrofit.create(MovieAPI.class);
+    }
+
     public void loadTrendingMoviesPerWeek(int pageNr) {
         Call<MovieApiResponse> call = movieAPI.loadTrendingMoviesByWeek(pageNr);
         call.enqueue(this);
     }
     public void loadMovieById(int id){
         Call<MovieApiResponse> call = movieAPI.loadMovieById(id);
+        call.enqueue(this);
+    }
+
+    public void addRating(double value, int movieId){
+        Call<MovieApiResponse> call = movieAPI.addRating(movieId, value);
         call.enqueue(this);
     }
 
