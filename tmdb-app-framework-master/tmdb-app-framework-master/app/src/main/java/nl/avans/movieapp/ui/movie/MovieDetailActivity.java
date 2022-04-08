@@ -120,7 +120,7 @@ private String trailer;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddRatingDialog dialog = new AddRatingDialog();
+                AddRatingDialog dialog = new AddRatingDialog(mMovie.getId());
                 dialog.show(getSupportFragmentManager(), "AddRating");
             }
         });

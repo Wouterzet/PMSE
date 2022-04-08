@@ -44,6 +44,10 @@ public interface MovieAPI {
     Call<TrailerApiResponse> loadTrailer(@Path("movie_id")int movieId);
 
     @FormUrlEncoded
+    @POST("movie/{movie_id}/rating?api_key=" + API_KEY + "&session_id=" + SESSION_ID)
+    Call<MovieApiResponse> addRating(@Path("movie_id")int movieId, @Field("value") double value);
+
+    @FormUrlEncoded
     @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> addMovieToList(@Path("list_id")int listId,@Field("media_id")  String media_id);
 }

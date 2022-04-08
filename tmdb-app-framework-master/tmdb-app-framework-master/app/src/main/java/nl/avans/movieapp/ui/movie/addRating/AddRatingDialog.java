@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +18,18 @@ import com.google.android.material.slider.Slider;
 import org.jetbrains.annotations.NotNull;
 
 import nl.avans.movieapp.R;
+import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 
 public class AddRatingDialog extends DialogFragment {
 
     private Button button;
     private Slider slider;
+    private int movieId;
+
+    public AddRatingDialog(int movieId) {
+        this.movieId = movieId;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,8 +52,20 @@ public class AddRatingDialog extends DialogFragment {
                     }
                 });
 
-        this.button = root.findViewById(R.id.rating_button);
         this.slider = root.findViewById(R.id.rating_slider);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        this.button = root.findViewById(R.id.rating_button);
+
+        this.button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MovieController controller = new MovieController();
+                controller.addRating(slider.getValue(), movieId);
+                AddRatingDialog.this.getDialog().cancel();
+                Toast toast = Toast.makeText(root.getContext(), "Succes!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        return root;
     }
 }
