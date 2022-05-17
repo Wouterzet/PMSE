@@ -60,7 +60,11 @@ public class MoviePageGridAdapter
             holder.mMovieTitle.setText(movie.getTitle());
         }
         if (movie.getTitle() != null) {
-            holder.mMovieLength.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
+            if (movie.getOverview().length() < 100) {
+                holder.mMovieLength.setText(String.valueOf(movie.getOverview()));
+            } else {
+                holder.mMovieLength.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
+            }
         }
         if (movie.getTitle() != null) {
             holder.mMovieReleaseYear.setText(movie.getRelease_date().substring(0,4));
