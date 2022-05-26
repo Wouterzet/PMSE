@@ -42,8 +42,8 @@ public class TvSpecController
 
 
     public void loadTvById(int movie_id){
-        Call<TvDetailApiResponse> call = movieAPI.loadTvById(movie_id);
-        Log.d("Controller",String.valueOf(movie_id));
+        Call<TvDetailApiResponse> call = movieAPI.loadTvById(1);
+        Log.d("Controller",String.valueOf(1));
         call.enqueue(this);
     }
 

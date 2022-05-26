@@ -1,19 +1,13 @@
 package nl.avans.movieapp.service;
 
-import java.util.List;
-
-import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.domain.SpecList;
 
 public class MovieListSpecApiResponse {
-    private SpecList results;
+    private MovieList results;
 
-    public MovieListSpecApiResponse(SpecList results) {
-        this.results = results;
-    }
+    public MovieListSpecApiResponse(MovieList results) { this.results = results; }
 
-    public SpecList getResults() {
+    public MovieList getResults() {
         return results;
     }
 

@@ -20,8 +20,7 @@ import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.domain.SpecList;
-import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
+import nl.avans.movieapp.domain.Tv;
 
 /**
  *
@@ -76,8 +75,15 @@ public class MovieListDetailAdapter
         return 0;
     }
 
+    public void setMovieList(List<Movie> movies) {
+        Log.d(LOG_TAG, "setMovieList");
+        this.movieArrayList.clear();
+        this.movieArrayList.addAll(movies);
+        this.notifyDataSetChanged();
+    }
+
     @Override
-    public void onMovieListsAvailable(SpecList movieLists) {
+    public void onMovieListsAvailable(MovieList movieLists) {
         Log.d(LOG_TAG, "We have " + movieLists + " items");
         this.movieArrayList.clear();
         this.movieArrayList.addAll(movieLists.getItems());

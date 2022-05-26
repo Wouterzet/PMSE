@@ -56,6 +56,7 @@ public class MovieListsController implements Callback<MovieListsApiResponse> {
     }
 
 
+
     @Override
     public void onResponse(Call<MovieListsApiResponse> call, Response<MovieListsApiResponse> response) {
         Log.d(LOG_TAG, "onResponse() - statuscode: " + response.code());
