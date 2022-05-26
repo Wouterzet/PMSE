@@ -5,6 +5,7 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
@@ -12,98 +13,48 @@ import nl.avans.movieapp.ui.movielist.MoviePageGridAdapter;
 
 public class FilterMovie {
     private final String TAG = getClass().getSimpleName();
-    private ArrayList<Movie> entireFilmList;
-    private ArrayList<Movie> fullFilmList;
-    private Filter filter;
-    private List<Movie> filteredList;
-    private MoviePageGridAdapter mMoviePageGridAdapter = new MoviePageGridAdapter();
-    public FilterMovie(ArrayList<Movie> fullList, List<Movie> filteredList) {
-        this.fullFilmList = fullList;
-        this.filteredList = filteredList;
-        this.filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();
-                String strConstraint = constraint.toString();
+    private ArrayList<Movie> fullFilmList = new ArrayList<>();
+    private ArrayList<Movie> filteredList;
+    private HashMap<String, Integer> genres = new HashMap<String, Integer>() {{
+        this.put("Action", 28);
+        this.put("Adventure", 12);
+        this.put("Animation", 16);
+        this.put("Comedy", 35);
+        this.put("Crime", 80);
+        this.put("Documentary", 99);
+        this.put("Drama", 18);
+        this.put("Family", 10751);
+        this.put("Fantasy", 14);
+        this.put("History", 36);
+        this.put("Horror", 27);
+        this.put("Music", 10402);
+        this.put("Mystery", 9648);
+        this.put("Romance", 10749);
+        this.put("Science Fiction", 878);
+        this.put("TV Movie", 10770);
+        this.put("Thriller", 53);
+        this.put("War", 10752);
+        this.put("Western", 37);
+    }};
 
-                if(entireFilmList.isEmpty()){
-                    entireFilmList.addAll(fullFilmList);
-                }
-
-                if(strConstraint.equals("All")){
-                    results.values = entireFilmList;
-                    return results;
-                }else if(isGenre(strConstraint)){
-//                    filterGenre(strConstraint);
-                }else if(isRating(strConstraint)){
-                    Double dblConstraint = Double.parseDouble(strConstraint);
-//                    filterRating(dblConstraint);
-                }else{
-                    filterReleaseDate(strConstraint);
-                }
-
-                results.values = filteredList;
-                return results;
-            }
-
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            }
+    public FilterMovie(ArrayList<Movie> fullList) {
+        this.fullFilmList.addAll(fullList);
+        this.filteredList = new ArrayList<>();
     };
 
-    }
-
-    public Filter getFilter(){
-        return filter;
-    }
-
-//    public List<Movie> filterGenre(String genreConstraint){
-//        Log.d(TAG, "filterGenre is aangeroepen.");
-//        this.filteredList.clear();
-//
-//        for(Movie film: this.entireFilmList){
-//            if(film.getGenre().equals(genreConstraint)){
-//                this.filteredList.add(film);
-//            }
-//        }
-//        if(this.filteredList != null){
-//            return this.filteredList;
-//        }
-//        return null;
-//    }
-//
-//    public ArrayList<Movie> filterRating(Double ratingConstraint){
-//
-//        return null;
-//    }
-
-    public ArrayList<Movie> filterReleaseDate(String dateConstraint){
-
-        return null;
-    }
-
-    public boolean isGenre(String strConstraint) {
-        String[] possibleGenres = {"Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama",
-                "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller",
-                "TV Movie", "War", "Western"};
-
-        for(String genre: possibleGenres){
-            if(strConstraint.contains(genre)){
-                return true;
+    public ArrayList<Movie> filterByGenre(String genre) {
+        filteredList.clear();
+        int id = genres.get(genre);
+        for (Movie x: fullFilmList) {
+            if(x.getGenre_ids().contains(id)) {
+                filteredList.add(x);
             }
         }
-
-        return false;
+        Log.d("LOG_TAG", "" + filteredList.size());
+        return filteredList;
     }
 
-    public boolean isRating(String strConstraint) {
-        try {
-            Double.parseDouble(strConstraint);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    public ArrayList<Movie> removeFilters() {
+        return fullFilmList;
     }
-    }
+}

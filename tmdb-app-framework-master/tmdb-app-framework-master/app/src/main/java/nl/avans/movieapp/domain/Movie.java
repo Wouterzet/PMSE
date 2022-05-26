@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import nl.avans.movieapp.controller.MovieController;
 
@@ -24,6 +25,10 @@ public class Movie implements Serializable {
 
     private Boolean adult;
 
+
+
+    private ArrayList<Integer> genre_ids;
+
     private String release_date;
     @NonNull
     private String title;
@@ -37,6 +42,7 @@ public class Movie implements Serializable {
             @NonNull String poster_path,
             @NonNull String backdrop_path,
             Boolean adult,
+            ArrayList<Integer> genre_ids,
 
             String release_date,
             @NonNull String overview,
@@ -48,6 +54,7 @@ public class Movie implements Serializable {
         this.vote_average = vote_average;
         this.poster_path = /* MovieController.BASE_POSTER_PATH_URL + */ poster_path;
         this.adult = adult;
+        this.genre_ids = genre_ids;
         this.title = title;
         this.backdrop_path = /* MovieController.BASE_POSTER_PATH_URL + */ backdrop_path;
         this.release_date = release_date;
@@ -91,5 +98,6 @@ public class Movie implements Serializable {
         return release_date;
     }
 
+    public ArrayList<Integer> getGenre_ids() { return genre_ids; }
 
 }

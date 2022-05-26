@@ -13,7 +13,6 @@ import java.util.List;
 
 import nl.avans.movieapp.controller.MoviePageController;
 import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.repository.MovieRepository;
 
 public class MoviePageViewModel extends AndroidViewModel
         implements MoviePageController.MoviePageControllerListener{
@@ -21,14 +20,12 @@ public class MoviePageViewModel extends AndroidViewModel
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
     private MutableLiveData<ArrayList<Movie>> mMovies = null;
-    private MovieRepository mMovieRepository;
     private Application application;
 
     public MoviePageViewModel(Application application) {
         super(application);
         this.application = application;
         this.mPageNr = new MutableLiveData<>(1);
-        this.mMovieRepository = new MovieRepository(application);
     }
 
     public LiveData<Integer> getPageNr() {
@@ -54,9 +51,6 @@ public class MoviePageViewModel extends AndroidViewModel
     @Override
     public void onMoviesAvailable(List<Movie> movies) {
         this.mMovies.setValue((ArrayList<Movie>) movies);
-        // Save in the database
-        this.mMovieRepository.clear();
-        this.mMovieRepository.insertAll(movies);
     }
 
     Observer observer = new Observer<List<Movie>>() {
@@ -72,13 +66,11 @@ public class MoviePageViewModel extends AndroidViewModel
         Log.w(LOG_TAG, "Error occurred getting the movies: " + message);
         // No connection to the internet? Get movies from the database.
         // Use observeForever since we do not have access to getLifeCycleOwner()
-        this.mMovieRepository.getAllMovies().observeForever(observer);
     }
 
     @Override
     protected void onCleared() {
         // Important! Clean up the observeForever call!
-        this.mMovieRepository.getAllMovies().removeObserver(observer);
         super.onCleared();
     }
 }

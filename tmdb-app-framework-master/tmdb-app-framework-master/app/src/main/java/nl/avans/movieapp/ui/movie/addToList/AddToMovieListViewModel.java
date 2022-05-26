@@ -6,16 +6,12 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.movieapp.controller.MovieListsController;
-import nl.avans.movieapp.controller.MoviePageController;
-import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.repository.MovieRepository;
 
 public class AddToMovieListViewModel extends AndroidViewModel
         implements MovieListsController.MovieListsControllerListener {

@@ -6,17 +6,9 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import nl.avans.movieapp.controller.MovieListSpecController;
-import nl.avans.movieapp.controller.MoviePageController;
-import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.domain.SpecList;
-import nl.avans.movieapp.repository.MovieRepository;
 
 public class MovieListDetailViewModel extends AndroidViewModel
         implements MovieListSpecController.MovieListsSpecControllerListener{
@@ -24,7 +16,6 @@ public class MovieListDetailViewModel extends AndroidViewModel
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
     private MutableLiveData<SpecList> mMovies = null;
-    private MovieRepository mMovieRepository;
     private Application application;
 
     public MovieListDetailViewModel(Application application) {
