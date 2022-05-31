@@ -83,10 +83,10 @@ public class MovieListDetailAdapter
     }
 
     @Override
-    public void onMovieListsAvailable(MovieList movieLists) {
+    public void onMovieListsAvailable(List<Movie> movieLists) {
         Log.d(LOG_TAG, "We have " + movieLists + " items");
         this.movieArrayList.clear();
-        this.movieArrayList.addAll(movieLists.getItems());
+        this.movieArrayList.addAll(movieLists);
         notifyDataSetChanged();
     }
 

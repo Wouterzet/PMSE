@@ -13,14 +13,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.List;
 
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
+import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
 public class MovieListDetailActivity extends AppCompatActivity implements Serializable, MovieListDetailAdapter.OnMovieSelectionListener {
-    private MovieList movieList;
+    private List<Movie> movieList;
     private MovieListDetailViewModel viewModel;
     private RecyclerView mRecyclerView;
     private MovieListDetailAdapter movieListAdapter;
@@ -29,7 +31,7 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        movieList = (MovieList) getIntent().getSerializableExtra("List");
+        movieList = (List<Movie>) getIntent().getSerializableExtra("List");
 
         Log.d("KAas", String.valueOf(movieList.getId()));
         setContentView(R.layout.activity_movie_list_detail);
@@ -45,10 +47,10 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         mRecyclerView.setAdapter(movieListAdapter);
         //         Call API request
         viewModel = new ViewModelProvider(this).get(MovieListDetailViewModel.class);
-        viewModel.getMovieListById(movieList.getId()).observe(this, new Observer<MovieList>() {
+        viewModel.getMovieListById(movieList.getId()).observe(this, new Observer<List<Movie>>() {
             @Override
-            public void onChanged(MovieList changedList) {
-                Log.d("Dit is een test", String.valueOf(changedList.getItems().size()));
+            public void onChanged(List<Movie> changedList) {
+                Log.d("Dit is een test", String.valueOf(changedList.size()));
                 movieList = changedList;
                 movieListAdapter.setMovieList(movieList.getItems());
             }

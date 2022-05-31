@@ -7,7 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
 import nl.avans.movieapp.controller.MovieListSpecController;
+import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.repository.MovieRepository;
 
@@ -16,7 +19,7 @@ public class MovieListDetailViewModel extends AndroidViewModel
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
-    private MutableLiveData<MovieList> mMovies = null;
+    private MutableLiveData<List<Movie>> mMovies = null;
     private MovieRepository mMovieRepository;
     private Application application;
 
@@ -30,7 +33,7 @@ public class MovieListDetailViewModel extends AndroidViewModel
     }
 
 
-    public MutableLiveData<MovieList> getMovieListById(int id) {
+    public MutableLiveData<List<Movie>> getMovieListById(int id) {
         Log.d(LOG_TAG, "getMovieList");
         if(mMovies == null) {
             mMovies = new MutableLiveData<>();
@@ -56,7 +59,7 @@ public class MovieListDetailViewModel extends AndroidViewModel
     }
 
     @Override
-    public void onMovieListsAvailable(MovieList movieLists) {
+    public void onMovieListsAvailable(List<Movie> movieLists) {
 
         this.mMovies.setValue(movieLists);
     }

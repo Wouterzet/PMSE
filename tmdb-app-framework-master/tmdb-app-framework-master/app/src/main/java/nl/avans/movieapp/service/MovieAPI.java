@@ -34,7 +34,7 @@ public interface MovieAPI {
     @GET("account/{account_id}/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListsApiResponse> loadMovieListsForUser();
 
-    @Headers({"Accept: application/json"})
+
     @GET("list/{list_id}?api_key=" + API_KEY + "&language=en-US")
     Call<MovieListSpecApiResponse> loadMovieListByID(@Path("list_id") int id);
 

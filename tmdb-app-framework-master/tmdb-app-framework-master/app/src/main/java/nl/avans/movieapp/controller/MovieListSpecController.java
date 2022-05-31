@@ -4,6 +4,9 @@ import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
+import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.service.MovieAPI;
 import nl.avans.movieapp.service.MovieListSpecApiResponse;
@@ -47,7 +50,7 @@ public class MovieListSpecController extends BaseMovieAppController implements C
 
             if(response.body().getResults() != null) {
                 // Deserialization
-                MovieList movieLists = response.body().getResults();
+                List<Movie> movieLists = response.body().getResults();
                 Log.d("Laatse kans", movieLists.toString());
                 listener.onMovieListsAvailable(movieLists);
             }
@@ -65,6 +68,6 @@ public class MovieListSpecController extends BaseMovieAppController implements C
      *
      */
     public interface MovieListsSpecControllerListener {
-        void onMovieListsAvailable(MovieList movieLists);
+        void onMovieListsAvailable(List<Movie> movieLists);
     }
 }

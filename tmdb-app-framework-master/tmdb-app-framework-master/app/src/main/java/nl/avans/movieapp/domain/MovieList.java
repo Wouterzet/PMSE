@@ -1,5 +1,7 @@
 package nl.avans.movieapp.domain;
 
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,6 +9,8 @@ public class MovieList implements Serializable {
 
     private String name;
     private String description;
+
+    @PrimaryKey
     private int id;
     private ArrayList<Movie> items;
     private int item_count;
