@@ -71,7 +71,8 @@ public class GalleryFragment extends Fragment implements MovieListAdapter.OnList
         
 //
         Intent intent = new Intent(getContext(), MovieListDetailActivity.class);
-        intent.putExtra("List", (Serializable) movieLists.get(position));
+        intent.putExtra("List", (Serializable) movieLists.get(position).getId());
+        intent.putExtra("Name", (Serializable) movieLists.get(position).getName());
         getContext().startActivity(intent);
     }
 

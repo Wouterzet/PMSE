@@ -31,14 +31,12 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        movieList = (List<Movie>) getIntent().getSerializableExtra("List");
+        int id = (int) getIntent().getSerializableExtra("List");
 
-        Log.d("KAas", String.valueOf(movieList.getId()));
         setContentView(R.layout.activity_movie_list_detail);
         Toolbar toolbar = findViewById(R.id.selected_movielist_toolbar);
-        toolbar.setTitle(movieList.getName());
+        toolbar.setTitle((String) getIntent().getSerializableExtra("Name"));
         setSupportActionBar(toolbar);
-        Log.d("Testn",String.valueOf(movieList.getName()));
         movieListAdapter = new MovieListDetailAdapter(movieList, this);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -47,12 +45,12 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         mRecyclerView.setAdapter(movieListAdapter);
         //         Call API request
         viewModel = new ViewModelProvider(this).get(MovieListDetailViewModel.class);
-        viewModel.getMovieListById(movieList.getId()).observe(this, new Observer<List<Movie>>() {
+        viewModel.getMovieListById(id).observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> changedList) {
                 Log.d("Dit is een test", String.valueOf(changedList.size()));
                 movieList = changedList;
-                movieListAdapter.setMovieList(movieList.getItems());
+                movieListAdapter.setMovieList(movieList);
             }
         });
 
@@ -63,7 +61,7 @@ public class MovieListDetailActivity extends AppCompatActivity implements Serial
         Log.d("Movie Selected", "onMovieSelected at pos " + position);
 
         Intent intent = new Intent(this, MovieDetailActivity.class);
-        intent.putExtra("Movie", movieList.getItems().get(position));
+        intent.putExtra("Movie", movieList.get(position));
         this.startActivity(intent);
     }
 }

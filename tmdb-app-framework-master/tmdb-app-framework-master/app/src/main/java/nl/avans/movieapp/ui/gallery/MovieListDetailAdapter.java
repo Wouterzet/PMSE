@@ -32,11 +32,11 @@ public class MovieListDetailAdapter
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private final OnMovieSelectionListener listener;
-    private ArrayList<Movie> movieArrayList = null;
+    private List<Movie> movieArrayList = new ArrayList<>();
 
-    public MovieListDetailAdapter(MovieList movieLists, OnMovieSelectionListener listener) {
+    public MovieListDetailAdapter(List<Movie> movieLists, OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
-        this.movieArrayList = movieLists.getItems();
+        this.movieArrayList = movieLists;
         this.listener = listener;
     }
 
@@ -77,16 +77,14 @@ public class MovieListDetailAdapter
 
     public void setMovieList(List<Movie> movies) {
         Log.d(LOG_TAG, "setMovieList");
-        this.movieArrayList.clear();
-        this.movieArrayList.addAll(movies);
+        this.movieArrayList = movies;
         this.notifyDataSetChanged();
     }
 
     @Override
     public void onMovieListsAvailable(List<Movie> movieLists) {
         Log.d(LOG_TAG, "We have " + movieLists + " items");
-        this.movieArrayList.clear();
-        this.movieArrayList.addAll(movieLists);
+        this.movieArrayList = movieLists;
         notifyDataSetChanged();
     }
 
