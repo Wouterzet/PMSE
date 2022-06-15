@@ -52,4 +52,8 @@ public interface MovieAPI {
     @FormUrlEncoded
     @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> addMovieToList(@Path("list_id")int listId,@Field("media_id")  String media_id);
+
+    @FormUrlEncoded
+    @POST("list/{list_id}/remove_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    Call<RemoveMovieFromListApiResponse> removeMovieFromList(@Path("list_id")int listId,@Field("media_id")  String media_id);
 }

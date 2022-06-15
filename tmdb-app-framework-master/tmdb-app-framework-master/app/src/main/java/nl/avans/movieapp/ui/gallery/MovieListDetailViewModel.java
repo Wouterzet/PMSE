@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
+import nl.avans.movieapp.controller.RemoveMovieController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.repository.MovieRepository;
@@ -40,6 +42,19 @@ public class MovieListDetailViewModel extends AndroidViewModel
             loadMovieList(this, id);
         }
         return mMovies;
+    }
+
+    public MutableLiveData<List<Movie>> removeMovieById(int position, int movieId, int listId) {
+        List<Movie> newList = mMovies.getValue();
+        newList.remove(position);
+        mMovies.setValue(newList);
+        removeMovieFromList(movieId, listId);
+        return mMovies;
+    }
+
+    private void removeMovieFromList(int movieId, int listId) {
+        RemoveMovieController removeMovieController = new RemoveMovieController();
+        removeMovieController.removeMovieFromList(movieId, listId);
     }
 
     private void loadMovieList(MovieListSpecController.MovieListsSpecControllerListener listener, int id){

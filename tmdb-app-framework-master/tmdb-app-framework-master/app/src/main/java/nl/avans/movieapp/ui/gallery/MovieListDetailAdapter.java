@@ -1,9 +1,11 @@
 package nl.avans.movieapp.ui.gallery;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieListSpecController;
+import nl.avans.movieapp.controller.RemoveMovieController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.domain.Tv;
@@ -45,7 +48,7 @@ public class MovieListDetailAdapter
     public MovieListsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(LOG_TAG, "onCreate aangeroepen");
 
-        int layoutIdForListItem = R.layout.movie_list_item;
+        int layoutIdForListItem = R.layout.movielist_list_item;
         final boolean shouldAttachToParentImmediately = false;
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         return new MovieListsViewHolder(view);
@@ -62,7 +65,9 @@ public class MovieListDetailAdapter
                 .centerInside()
                 .into(holder.moviePoster);
         holder.movieName.setText(movie.getTitle());
-        holder.movieOverview.setText(movie.getOverview());
+        if (movie.getOverview().length() > 100) {
+            holder.movieOverview.setText(String.valueOf(movie.getOverview().substring(0, 100).trim() + "...more info"));
+        }
 
 
     }
@@ -97,12 +102,21 @@ public class MovieListDetailAdapter
         public TextView movieName;
         public TextView movieOverview;
         public ImageView moviePoster;
+        public ImageButton deleteMovie;
 
         public MovieListsViewHolder(@NonNull View itemView) {
             super(itemView);
             movieName = (TextView) itemView.findViewById(R.id.movielist_griditem_title);
             movieOverview = (TextView) itemView.findViewById(R.id.movielist_griditem_overview);
             moviePoster = (ImageView) itemView.findViewById(R.id.movielist_griditem_poster);
+            deleteMovie = (ImageButton) itemView.findViewById(R.id.delete_from_movielist);
+            deleteMovie.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(LOG_TAG, "onClick on item " + getAdapterPosition());
+                    listener.onDeleteSelected(getAdapterPosition());
+                }
+            });
             itemView.setOnClickListener(this);
         }
 
@@ -115,5 +129,7 @@ public class MovieListDetailAdapter
     }
     public interface OnMovieSelectionListener {
         void onMovieSelected(int position);
+
+        void onDeleteSelected(int adapterPosition);
     }
 }
