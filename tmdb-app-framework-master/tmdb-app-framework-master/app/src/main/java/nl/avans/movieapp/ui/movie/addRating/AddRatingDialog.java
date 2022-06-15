@@ -18,6 +18,7 @@ import com.google.android.material.slider.Slider;
 import org.jetbrains.annotations.NotNull;
 
 import nl.avans.movieapp.R;
+import nl.avans.movieapp.controller.AddRatingController;
 import nl.avans.movieapp.controller.MovieController;
 import nl.avans.movieapp.ui.movie.addToList.AddMovieToListDialog;
 
@@ -59,7 +60,7 @@ public class AddRatingDialog extends DialogFragment {
 
             @Override
             public void onClick(View v) {
-                MovieController controller = new MovieController();
+                AddRatingController controller = new AddRatingController();
                 controller.addRating(slider.getValue(), movieId);
                 AddRatingDialog.this.getDialog().cancel();
                 Toast toast = Toast.makeText(root.getContext(), "Succes!", Toast.LENGTH_SHORT);

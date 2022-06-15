@@ -9,12 +9,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import nl.avans.movieapp.R;
+
 import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.controller.RemoveMovieController;
 import nl.avans.movieapp.domain.Movie;
-import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.repository.MovieRepository;
+
 
 public class MovieListDetailViewModel extends AndroidViewModel
         implements MovieListSpecController.MovieListsSpecControllerListener{
@@ -22,7 +21,6 @@ public class MovieListDetailViewModel extends AndroidViewModel
     private final String LOG_TAG = this.getClass().getSimpleName();
     private MutableLiveData<Integer> mPageNr;
     private MutableLiveData<List<Movie>> mMovies = null;
-    private MovieRepository mMovieRepository;
     private Application application;
 
     public MovieListDetailViewModel(Application application) {
