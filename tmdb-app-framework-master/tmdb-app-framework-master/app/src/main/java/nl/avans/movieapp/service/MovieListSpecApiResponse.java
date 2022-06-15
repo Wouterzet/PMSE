@@ -1,26 +1,24 @@
 package nl.avans.movieapp.service;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.domain.SpecList;
 
 public class MovieListSpecApiResponse {
-    private SpecList results;
+    private String created_by;
+    private List<Movie> items;
+    public MovieListSpecApiResponse(String created_by,List<Movie> items) { this.items = items; this.created_by = created_by;}
 
-    public MovieListSpecApiResponse(SpecList results) {
-        this.results = results;
-    }
-
-    public SpecList getResults() {
-        return results;
+    public List<Movie> getResults() {
+        return items;
     }
 
     @Override
     public String toString() {
         return "MovieListsApiResponse{" +
-                ", results=" + results +
+                ", results=" + items +
                 '}';
     }
 }

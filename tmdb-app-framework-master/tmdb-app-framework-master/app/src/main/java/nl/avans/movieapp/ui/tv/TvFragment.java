@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.controller.MovieController;
+import nl.avans.movieapp.controller.TvSpecController;
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
@@ -38,6 +39,7 @@ public class TvFragment
     private final String LOG_TAG = this.getClass().getSimpleName();
 
     private TvViewModel homeViewModel;
+    private TvSpecController controller;
     private ArrayList<Tv> mMovies = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private TvGridAdapter mMoviesGridAdapter;
@@ -78,6 +80,7 @@ public class TvFragment
     @Override
     public void onTVSelected(int position) {
         Log.d(LOG_TAG, "onMovieSelected at pos " + position);
+
 
         Intent intent = new Intent(getContext(), TvDetailActivity.class);
         intent.putExtra("Tv", mMovies.get(position));

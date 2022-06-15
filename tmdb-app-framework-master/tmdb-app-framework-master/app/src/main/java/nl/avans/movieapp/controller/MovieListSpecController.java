@@ -2,25 +2,17 @@ package nl.avans.movieapp.controller;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.MovieList;
-import nl.avans.movieapp.domain.SpecList;
 import nl.avans.movieapp.service.MovieAPI;
-import nl.avans.movieapp.service.MovieApiResponse;
 import nl.avans.movieapp.service.MovieListSpecApiResponse;
-import nl.avans.movieapp.service.MovieListsApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MovieListSpecController extends BaseMovieAppController implements Callback<MovieListSpecApiResponse> {
@@ -41,7 +33,7 @@ public class MovieListSpecController extends BaseMovieAppController implements C
     }
 
     public void loadMovieListByID(int id) {
-        Call<MovieListSpecApiResponse> call = movieAPI.loadMovieListByID(7100269);
+        Call<MovieListSpecApiResponse> call = movieAPI.loadMovieListByID(id);
         call.enqueue(this);
     }
 
@@ -52,12 +44,13 @@ public class MovieListSpecController extends BaseMovieAppController implements C
         if(response.isSuccessful()) {
             Log.d(LOG_TAG, "response: Test " + response.message());
             Log.d(LOG_TAG, "response: Test " + response.raw());
-            Log.d(LOG_TAG, "response: " + response.body());
+            Log.d(LOG_TAG, "response: Test" + response.body());
             Log.d(LOG_TAG, "response: Test " + response.body().getResults());
+            Log.d(LOG_TAG, "response: Test " + response.body());
 
             if(response.body().getResults() != null) {
                 // Deserialization
-                SpecList movieLists = response.body().getResults();
+                List<Movie> movieLists = response.body().getResults();
                 Log.d("Laatse kans", movieLists.toString());
                 listener.onMovieListsAvailable(movieLists);
             }
@@ -75,6 +68,6 @@ public class MovieListSpecController extends BaseMovieAppController implements C
      *
      */
     public interface MovieListsSpecControllerListener {
-        void onMovieListsAvailable(SpecList movieLists);
+        void onMovieListsAvailable(List<Movie> movieLists);
     }
 }

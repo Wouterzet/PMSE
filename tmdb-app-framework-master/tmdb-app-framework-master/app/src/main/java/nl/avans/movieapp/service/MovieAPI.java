@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -33,7 +34,8 @@ public interface MovieAPI {
     @GET("account/{account_id}/lists?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<MovieListsApiResponse> loadMovieListsForUser();
 
-    @GET("list/{list_id}?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+
+    @GET("list/{list_id}?api_key=" + API_KEY + "&language=en-US")
     Call<MovieListSpecApiResponse> loadMovieListByID(@Path("list_id") int id);
 
     @POST("list?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
@@ -50,4 +52,8 @@ public interface MovieAPI {
     @FormUrlEncoded
     @POST("list/{list_id}/add_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
     Call<CreateMovieListApiResponse> addMovieToList(@Path("list_id")int listId,@Field("media_id")  String media_id);
+
+    @FormUrlEncoded
+    @POST("list/{list_id}/remove_item?api_key=" + API_KEY + "&language=en-US&session_id=" + SESSION_ID)
+    Call<RemoveMovieFromListApiResponse> removeMovieFromList(@Path("list_id")int listId,@Field("media_id")  String media_id);
 }

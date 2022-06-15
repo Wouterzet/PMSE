@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import nl.avans.movieapp.R;
+import nl.avans.movieapp.controller.MovieListSpecController;
 import nl.avans.movieapp.controller.MovieListsController;
 import nl.avans.movieapp.domain.MovieList;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
@@ -67,9 +68,11 @@ public class GalleryFragment extends Fragment implements MovieListAdapter.OnList
     @Override
     public void onListSelected(int position) {
         Log.d(LOG_TAG, "Lijst kan je ook klikken " + position);
+        
 //
         Intent intent = new Intent(getContext(), MovieListDetailActivity.class);
-        intent.putExtra("List", (Serializable) movieLists.get(position));
+        intent.putExtra("List", (Serializable) movieLists.get(position).getId());
+        intent.putExtra("Name", (Serializable) movieLists.get(position).getName());
         getContext().startActivity(intent);
     }
 
