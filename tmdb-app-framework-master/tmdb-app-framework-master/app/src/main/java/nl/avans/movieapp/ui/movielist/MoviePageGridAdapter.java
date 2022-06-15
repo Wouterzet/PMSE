@@ -23,8 +23,8 @@ public class MoviePageGridAdapter
         extends RecyclerView.Adapter<MoviePageGridAdapter.MoviesGridViewHolder> {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
-    private final ArrayList<Movie> moviesArrayList = new ArrayList<>();
-    private  OnMovieSelectionListener listener;
+    private ArrayList<Movie> moviesArrayList = new ArrayList<>();
+    private OnMovieSelectionListener listener;
 
     public MoviePageGridAdapter(OnMovieSelectionListener listener) {
         Log.d(LOG_TAG, "Constructor aangeroepen");
@@ -60,7 +60,11 @@ public class MoviePageGridAdapter
             holder.mMovieTitle.setText(movie.getTitle());
         }
         if (movie.getTitle() != null) {
-            holder.mMovieLength.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
+            if (movie.getOverview().length() < 100) {
+                holder.mMovieLength.setText(String.valueOf(movie.getOverview()));
+            } else {
+                holder.mMovieLength.setText(String.valueOf(movie.getOverview().substring(0,100).trim() + "...more info"));
+            }
         }
         if (movie.getTitle() != null) {
             holder.mMovieReleaseYear.setText(movie.getRelease_date().substring(0,4));
@@ -76,10 +80,9 @@ public class MoviePageGridAdapter
         return moviesArrayList.size();
     }
 
-    public void setMovieList(List<Movie> movies) {
-        Log.d(LOG_TAG, "setMovieList");
-        this.moviesArrayList.clear();
-        this.moviesArrayList.addAll(movies);
+    public void setMovieList(ArrayList<Movie> movies) {
+        Log.d(LOG_TAG, "setMovieList " + movies.size());
+        this.moviesArrayList = movies;
         this.notifyDataSetChanged();
     }
 

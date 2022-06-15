@@ -1,5 +1,6 @@
 package nl.avans.movieapp.ui.movielist;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import nl.avans.movieapp.R;
 import nl.avans.movieapp.domain.Movie;
+import nl.avans.movieapp.filters.FilterMovie;
 import nl.avans.movieapp.filters.SearchFilter;
 import nl.avans.movieapp.ui.movie.MovieDetailActivity;
 
@@ -34,6 +36,7 @@ public class MoviePageFragment extends Fragment
 
     private MoviePageViewModel moviePageViewModel;
     private ArrayList<Movie> mMovies = new ArrayList<>();
+    FilterMovie filterMovie;
     private RecyclerView mRecyclerView;
     private MoviePageGridAdapter mMoviesGridAdapter;
     private SearchFilter searchFilter;
@@ -61,6 +64,7 @@ public class MoviePageFragment extends Fragment
             public void onChanged(@Nullable ArrayList<Movie> movies) {
                 Log.d(LOG_TAG, "onChanged");
                 mMovies = movies;
+                filterMovie = new FilterMovie(mMovies);
                 mFullList= movies;
                 mMoviesGridAdapter.setMovieList(mMovies);
             }
@@ -142,44 +146,103 @@ public class MoviePageFragment extends Fragment
 //        return true;
 //    }
 
-//    @SuppressLint("NonConstantResourceId")
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Log.d(LOG_TAG, "onOptionsItemSelected");
-//        // Handle item selection
-//        switch (item.getItemId()) {
-//            case R.id.filter_on_genre_western:
-//            case R.id.filter_on_genre_war:
-//            case R.id.filter_on_genre_thriller:
-//            case R.id.filter_on_genre_science_fiction:
-//            case R.id.filter_on_genre_romance:
-//            case R.id.filter_on_genre_mystery:
-//            case R.id.filter_on_genre_music:
-//            case R.id.filter_on_genre_horror:
-//            case R.id.filter_on_genre_history:
-//            case R.id.filter_on_genre_fantasy:
-//            case R.id.filter_on_genre_family:
-//            case R.id.filter_on_genre_drama:
-//            case R.id.filter_on_genre_documentary:
-//            case R.id.filter_on_genre_crime:
-//            case R.id.filter_on_genre_comedy:
-//            case R.id.filter_on_genre_animation:
-//            case R.id.filter_on_genre_adventure:
-//            case R.id.filter_on_genre_action:
-//            case R.id.filter_on_genre_all:
-//
-//                return true;
-//
-//            default:
-//                Log.d(LOG_TAG, "default switch option");
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(LOG_TAG, "onOptionsItemSelected" + item.toString());
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.filter_on_genre_western:
+                mMovies = filterMovie.filterByGenre("Western");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_war:
+                mMovies = filterMovie.filterByGenre("War");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_thriller:
+                mMovies = filterMovie.filterByGenre("Thriller");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_science_fiction:
+                mMovies = filterMovie.filterByGenre("Science Fiction");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_romance:
+                mMovies = filterMovie.filterByGenre("Romance");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_mystery:
+                mMovies = filterMovie.filterByGenre("Mystery");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_music:
+                mMovies = filterMovie.filterByGenre("Music");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_horror:
+                mMovies = filterMovie.filterByGenre("Horror");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_history:
+                mMovies = filterMovie.filterByGenre("History");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_fantasy:
+                mMovies = filterMovie.filterByGenre("Fantasy");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_family:
+                mMovies = filterMovie.filterByGenre("Family");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_drama:
+                mMovies = filterMovie.filterByGenre("Drama");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_documentary:
+                mMovies = filterMovie.filterByGenre("Documentary");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_crime:
+                mMovies = filterMovie.filterByGenre("Crime");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_comedy:
+                mMovies = filterMovie.filterByGenre("Comedy");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_animation:
+                mMovies = filterMovie.filterByGenre("Animation");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_adventure:
+                mMovies = filterMovie.filterByGenre("Adventure");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_action:
+                mMovies = filterMovie.filterByGenre("Action");
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+            case R.id.filter_on_genre_all:
+                mMovies = filterMovie.removeFilters();
+                mMoviesGridAdapter.setMovieList(mMovies);
+                break;
+
+            default:
+                Log.d(LOG_TAG, "default switch option");
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 
     @Override
     public void onMovieSelected(int position) {
         Log.d(LOG_TAG, "onMovieSelected at pos " + position);
+        for (int x: mMovies.get(position).getGenre_ids()) {
+            Log.d(LOG_TAG, "Dit is een test" + String.valueOf(x));
+        }
 
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
         intent.putExtra("Movie", mMovies.get(position));

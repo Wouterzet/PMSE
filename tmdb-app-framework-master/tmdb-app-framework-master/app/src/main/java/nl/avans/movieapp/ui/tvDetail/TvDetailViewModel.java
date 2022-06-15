@@ -1,27 +1,17 @@
 package nl.avans.movieapp.ui.tvDetail;
 
 import android.app.Application;
-import android.util.AndroidException;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
-import nl.avans.movieapp.controller.CommentController;
-import nl.avans.movieapp.controller.MovieController;
-import nl.avans.movieapp.controller.TvController;
 import nl.avans.movieapp.controller.TvSpecController;
-import nl.avans.movieapp.domain.Comment;
-import nl.avans.movieapp.domain.Movie;
 import nl.avans.movieapp.domain.Tv;
-import nl.avans.movieapp.repository.MovieRepository;
 
 public class TvDetailViewModel extends AndroidViewModel
         implements TvSpecController.TvSpecControllerListener {
